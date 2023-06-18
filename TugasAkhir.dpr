@@ -2,24 +2,28 @@ program TugasAkhir;
 
 uses
   Forms,
-  Menu in 'Menu.pas' {Form1},
-  SiswaGrid in 'SiswaGrid.pas' {Siswa},
+  SiswaGrid in 'SiswaGrid.pas' {FSiswa},
   WLGrid in 'WLGrid.pas' {wali_kelas},
   laporanGrid in 'laporanGrid.pas' {laporan},
   OTGrid in 'OTGrid.pas' {orang_tua},
   prestasiGridpas in 'prestasiGridpas.pas' {prestasi},
-  pelanggaranGrid in 'pelanggaranGrid.pas' {pelanggaran};
+  pelanggaranGrid in 'pelanggaranGrid.pas' {pelanggaran},
+  Unitmenu in 'Unitmenu.pas' {Fmenus},
+  UTSiswas in 'UTSiswas.pas' {FTSiswa},
+  UTLaporan in 'UTLaporan.pas' {FTLaporan};
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TSiswa, Siswa);
+  Application.CreateForm(TFmenus, Fmenus);
+  Application.CreateForm(TFSiswa, FSiswa);
   Application.CreateForm(Twali_kelas, wali_kelas);
   Application.CreateForm(Tlaporan, laporan);
   Application.CreateForm(Torang_tua, orang_tua);
   Application.CreateForm(Tprestasi, prestasi);
   Application.CreateForm(Tpelanggaran, pelanggaran);
+  Application.CreateForm(TFTSiswa, FTSiswa);
+  Application.CreateForm(TFTLaporan, FTLaporan);
   Application.Run;
 end.

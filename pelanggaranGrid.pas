@@ -4,10 +4,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs;
+  Dialogs, StdCtrls, Grids, DBGrids, DB, ADODB;
 
 type
   Tpelanggaran = class(TForm)
+    conPelanggaran: TADOConnection;
+    qryPelanggaran: TADOQuery;
+    dbgrdPelanggaran: TDBGrid;
+    TPelanggaran: TButton;
+    HPelanggaran: TButton;
   private
     { Private declarations }
   public
