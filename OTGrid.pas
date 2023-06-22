@@ -15,6 +15,24 @@ type
     qryOT: TADOQuery;
     TOT: TButton;
     HOT: TButton;
+    lbl3: TLabel;
+    lbl8: TLabel;
+    lbl4: TLabel;
+    edtNamaOT: TEdit;
+    edtNIKOT: TEdit;
+    edtTPOT: TEdit;
+    lbl6: TLabel;
+    lbl7: TLabel;
+    lbl9: TLabel;
+    edtpekerjaan: TEdit;
+    edtTelp: TEdit;
+    edtAlamat: TEdit;
+    lbl10: TLabel;
+    cbbJKOT: TComboBox;
+    edtStatus: TEdit;
+    lbl11: TLabel;
+    edtStatusHUB: TEdit;
+    lbl1: TLabel;
   private
     { Private declarations }
   public

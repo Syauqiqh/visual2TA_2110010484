@@ -8,9 +8,7 @@ uses
   OTGrid in 'OTGrid.pas' {orang_tua},
   prestasiGridpas in 'prestasiGridpas.pas' {prestasi},
   pelanggaranGrid in 'pelanggaranGrid.pas' {pelanggaran},
-  Unitmenu in 'Unitmenu.pas' {Fmenus},
-  UTSiswas in 'UTSiswas.pas' {FTSiswa},
-  UTLaporan in 'UTLaporan.pas' {FTLaporan};
+  Unitmenu in 'Unitmenu.pas' {Fmenus};
 
 {$R *.res}
 
@@ -23,7 +21,5 @@ begin
   Application.CreateForm(Torang_tua, orang_tua);
   Application.CreateForm(Tprestasi, prestasi);
   Application.CreateForm(Tpelanggaran, pelanggaran);
-  Application.CreateForm(TFTSiswa, FTSiswa);
-  Application.CreateForm(TFTLaporan, FTLaporan);
   Application.Run;
 end.
