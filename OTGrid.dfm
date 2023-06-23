@@ -70,7 +70,7 @@ object orang_tua: Torang_tua
     Caption = 'Status'
   end
   object lbl1: TLabel
-    Left = 392
+    Left = 384
     Top = 104
     Width = 96
     Height = 13

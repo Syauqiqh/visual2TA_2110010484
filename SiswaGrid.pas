@@ -15,7 +15,6 @@ type
     tambahSiswa: TButton;
     LDSiswa: TButton;
     VRSiswa: TButton;
-    VGSiswa: TButton;
     VOT: TButton;
     VWK: TButton;
     qrySiswa: TADOQuery;

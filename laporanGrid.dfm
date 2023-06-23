@@ -1,6 +1,6 @@
 object laporan: Tlaporan
-  Left = 350
-  Top = 128
+  Left = 221
+  Top = 291
   Width = 973
   Height = 415
   Caption = 'Tambah Laporan'

@@ -1,6 +1,6 @@
 object FSiswa: TFSiswa
-  Left = 348
-  Top = 148
+  Left = 349
+  Top = 257
   Width = 997
   Height = 453
   Caption = 'siswagrid'
@@ -147,21 +147,13 @@ object FSiswa: TFSiswa
     Caption = 'View Report'
     TabOrder = 3
   end
-  object VGSiswa: TButton
-    Left = 664
-    Top = 232
-    Width = 89
-    Height = 33
-    Caption = 'View Grafik'
-    TabOrder = 4
-  end
   object VOT: TButton
-    Left = 816
+    Left = 656
     Top = 232
     Width = 89
     Height = 33
     Caption = 'View Orang Tua'
-    TabOrder = 5
+    TabOrder = 4
   end
   object VWK: TButton
     Left = 336
@@ -169,50 +161,50 @@ object FSiswa: TFSiswa
     Width = 97
     Height = 33
     Caption = 'View wakil Kelas'
-    TabOrder = 6
+    TabOrder = 5
   end
   object HSiswa: TButton
-    Left = 216
-    Top = 8
-    Width = 75
-    Height = 25
+    Left = 816
+    Top = 232
+    Width = 105
+    Height = 33
     Caption = 'Hapus Data'
-    TabOrder = 7
+    TabOrder = 6
   end
   object edtEnis: TEdit
     Left = 120
     Top = 8
     Width = 257
     Height = 21
-    TabOrder = 8
+    TabOrder = 7
   end
   object edtEnisn: TEdit
     Left = 120
     Top = 40
     Width = 257
     Height = 21
-    TabOrder = 9
+    TabOrder = 8
   end
   object edtENS: TEdit
     Left = 120
     Top = 72
     Width = 257
     Height = 21
-    TabOrder = 10
+    TabOrder = 9
   end
   object edtEnik: TEdit
     Left = 120
     Top = 104
     Width = 257
     Height = 21
-    TabOrder = 11
+    TabOrder = 10
   end
   object edtETL: TEdit
     Left = 120
     Top = 136
     Width = 257
     Height = 21
-    TabOrder = 12
+    TabOrder = 11
   end
   object dtpSiswa: TDateTimePicker
     Left = 120
@@ -221,7 +213,7 @@ object FSiswa: TFSiswa
     Height = 21
     Date = 45095.438990266200000000
     Time = 45095.438990266200000000
-    TabOrder = 13
+    TabOrder = 12
   end
   object cbbJKSiwa: TComboBox
     Left = 120
@@ -229,7 +221,7 @@ object FSiswa: TFSiswa
     Width = 257
     Height = 21
     ItemHeight = 13
-    TabOrder = 14
+    TabOrder = 13
     Text = 'pilih jenis kelamin'
   end
   object cbbJurusan: TComboBox
@@ -238,7 +230,7 @@ object FSiswa: TFSiswa
     Width = 249
     Height = 21
     ItemHeight = 13
-    TabOrder = 15
+    TabOrder = 14
     Text = 'pilih jurusan'
   end
   object edtEWK: TEdit
@@ -246,42 +238,42 @@ object FSiswa: TFSiswa
     Top = 40
     Width = 249
     Height = 21
-    TabOrder = 16
+    TabOrder = 15
   end
   object edtEalamat: TEdit
     Left = 544
     Top = 72
     Width = 249
     Height = 21
-    TabOrder = 17
+    TabOrder = 16
   end
   object edtEHP: TEdit
     Left = 544
     Top = 104
     Width = 249
     Height = 21
-    TabOrder = 18
+    TabOrder = 17
   end
   object edtEsiswaOT: TEdit
     Left = 544
     Top = 136
     Width = 249
     Height = 21
-    TabOrder = 19
+    TabOrder = 18
   end
   object edtEsiswaLaporan: TEdit
     Left = 544
     Top = 168
     Width = 249
     Height = 21
-    TabOrder = 20
+    TabOrder = 19
   end
   object edtEsiswaStatus: TEdit
     Left = 544
     Top = 200
     Width = 249
     Height = 21
-    TabOrder = 21
+    TabOrder = 20
   end
   object dsSiswa: TDataSource
     Left = 408
