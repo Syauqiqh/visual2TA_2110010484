@@ -8,7 +8,6 @@ uses
 
 type
   Tpelanggaran = class(TForm)
-    conPelanggaran: TADOConnection;
     qryPelanggaran: TADOQuery;
     dbgrdPelanggaran: TDBGrid;
     TPelanggaran: TButton;
@@ -19,6 +18,10 @@ type
     cbbJenis: TComboBox;
     lbl3: TLabel;
     dtpLaporan: TDateTimePicker;
+    conPelanggaran: TADOConnection;
+    dsPelanggaran: TDataSource;
+    btnLDLaporan: TButton;
+    procedure btnLDLaporanClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -31,5 +34,16 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Tpelanggaran.btnLDLaporanClick(Sender: TObject);
+begin
+  qryPelanggaran.SQL.Clear;
+  qryPelanggaran.SQL.Add('select * from pelanggaran');
+  qryPelanggaran.Open;
+
+  dbgrdPelanggaran.Columns[0].Width:=20;
+  dbgrdPelanggaran.Columns[1].Width:=60;
+  dbgrdPelanggaran.Columns[2].Width:=60;
+end;
 
 end.

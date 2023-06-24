@@ -1,7 +1,7 @@
 object prestasi: Tprestasi
   Left = 192
   Top = 125
-  Width = 425
+  Width = 496
   Height = 343
   Caption = 'prestasi'
   Color = clBtnFace
@@ -37,8 +37,9 @@ object prestasi: Tprestasi
   object dbgrdPrestasi: TDBGrid
     Left = 16
     Top = 120
-    Width = 377
+    Width = 441
     Height = 161
+    DataSource = dsPrestasi
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -91,13 +92,38 @@ object prestasi: Tprestasi
     Time = 45095.481726238420000000
     TabOrder = 5
   end
-  object conPrestasi: TADOConnection
-    Left = 344
+  object btnLDPrestasi: TButton
+    Left = 351
     Top = 8
+    Width = 89
+    Height = 33
+    Caption = 'Load Data'
+    TabOrder = 6
+  end
+  object conPrestasi: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
+      ' Security Info=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 392
+    Top = 64
   end
   object qryPrestasi: TADOQuery
+    Active = True
+    Connection = conPrestasi
+    CursorType = ctStatic
     Parameters = <>
+    SQL.Strings = (
+      'select * from prestasi')
     Left = 344
+    Top = 64
+  end
+  object dsPrestasi: TDataSource
+    DataSet = qryPrestasi
+    Left = 448
     Top = 64
   end
 end

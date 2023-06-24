@@ -1,7 +1,7 @@
 object pelanggaran: Tpelanggaran
   Left = 192
   Top = 125
-  Width = 451
+  Width = 531
   Height = 371
   Caption = 'pelanggaran'
   Color = clBtnFace
@@ -37,8 +37,9 @@ object pelanggaran: Tpelanggaran
   object dbgrdPelanggaran: TDBGrid
     Left = 8
     Top = 136
-    Width = 409
+    Width = 481
     Height = 169
+    DataSource = dsPelanggaran
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -91,13 +92,39 @@ object pelanggaran: Tpelanggaran
     Time = 45095.481726238420000000
     TabOrder = 5
   end
-  object conPelanggaran: TADOConnection
-    Left = 384
-    Top = 80
+  object btnLDLaporan: TButton
+    Left = 378
+    Top = 24
+    Width = 89
+    Height = 33
+    Caption = 'Load Data'
+    TabOrder = 6
+    OnClick = btnLDLaporanClick
   end
   object qryPelanggaran: TADOQuery
+    Active = True
+    Connection = conPelanggaran
+    CursorType = ctStatic
     Parameters = <>
-    Left = 392
-    Top = 24
+    SQL.Strings = (
+      'select * from pelanggaran')
+    Left = 448
+    Top = 72
+  end
+  object conPelanggaran: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
+      ' Security Info=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
+    Left = 384
+    Top = 72
+  end
+  object dsPelanggaran: TDataSource
+    DataSet = qryPelanggaran
+    Left = 328
+    Top = 104
   end
 end

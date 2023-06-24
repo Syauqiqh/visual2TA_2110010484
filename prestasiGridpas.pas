@@ -19,6 +19,8 @@ type
     cbbJenis: TComboBox;
     lbl3: TLabel;
     dtpLaporan: TDateTimePicker;
+    btnLDPrestasi: TButton;
+    dsPrestasi: TDataSource;
   private
     { Private declarations }
   public
