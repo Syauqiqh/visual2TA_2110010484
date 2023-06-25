@@ -29,6 +29,9 @@ type
     dtpSiswa: TDateTimePicker;
     lbl8: TLabel;
     edtTP: TEdit;
+    dsWK: TDataSource;
+    btnLDWK: TButton;
+    procedure btnLDWKClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -41,5 +44,22 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Twali_kelas.btnLDWKClick(Sender: TObject);
+begin
+  qryWK.SQL.Clear;
+  qryWK.SQL.Add('select * from wali_kelas');
+  qryWK.Open;
+
+  dbgrdWK.Columns[0].Width:=20;
+  dbgrdWK.Columns[1].Width:=110;
+  dbgrdWK.Columns[2].Width:=75;
+  dbgrdWK.Columns[3].Width:=65;
+  dbgrdWK.Columns[4].Width:=90;
+  dbgrdWK.Columns[5].Width:=150;
+  dbgrdWK.Columns[6].Width:=150;
+  dbgrdWK.Columns[7].Width:=70;
+  dbgrdWK.Columns[8].Width:=75;
+end;
 
 end.

@@ -36,14 +36,14 @@ object orang_tua: Torang_tua
   end
   object lbl6: TLabel
     Left = 40
-    Top = 112
+    Top = 104
     Width = 48
     Height = 13
     Caption = 'Pekerjaan'
   end
   object lbl7: TLabel
     Left = 40
-    Top = 144
+    Top = 136
     Width = 38
     Height = 13
     Caption = 'Telepon'
@@ -81,6 +81,7 @@ object orang_tua: Torang_tua
     Top = 176
     Width = 897
     Height = 145
+    DataSource = dsOT
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -98,7 +99,7 @@ object orang_tua: Torang_tua
   end
   object HOT: TButton
     Left = 768
-    Top = 56
+    Top = 64
     Width = 113
     Height = 33
     Caption = 'Hapus Orabng Tua'
@@ -127,14 +128,14 @@ object orang_tua: Torang_tua
   end
   object edtpekerjaan: TEdit
     Left = 136
-    Top = 112
+    Top = 104
     Width = 241
     Height = 21
     TabOrder = 6
   end
   object edtTelp: TEdit
     Left = 136
-    Top = 144
+    Top = 136
     Width = 241
     Height = 21
     TabOrder = 7
@@ -172,16 +173,38 @@ object orang_tua: Torang_tua
     Height = 21
     TabOrder = 11
   end
+  object btnLDOT: TButton
+    Left = 767
+    Top = 112
+    Width = 114
+    Height = 33
+    Caption = 'Load Data'
+    TabOrder = 12
+    OnClick = btnLDOTClick
+  end
   object dsOT: TDataSource
+    DataSet = qryOT
     Left = 8
     Top = 8
   end
   object conOT: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
+      ' Security Info=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 7
     Top = 128
   end
   object qryOT: TADOQuery
+    Active = True
+    Connection = conOT
+    CursorType = ctStatic
     Parameters = <>
+    SQL.Strings = (
+      'select * from orang_tua')
     Left = 8
     Top = 72
   end

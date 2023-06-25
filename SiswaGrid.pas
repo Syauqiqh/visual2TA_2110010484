@@ -49,6 +49,8 @@ type
     consiswa: TADOConnection;
     qrysiswa: TADOQuery;
     procedure LDSiswaClick(Sender: TObject);
+    procedure VWKClick(Sender: TObject);
+    procedure VOTClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -59,6 +61,8 @@ var
   FSiswa: TFSiswa;
 
 implementation
+
+uses WLGrid,OTGrid;
 
 {$R *.dfm}
 
@@ -84,6 +88,16 @@ begin
   dbgridSiswa.Columns[13].Width:=60;
   dbgridSiswa.Columns[14].Width:=45;
 
+end;
+
+procedure TFSiswa.VWKClick(Sender: TObject);
+begin
+wali_kelas.Show;
+end;
+
+procedure TFSiswa.VOTClick(Sender: TObject);
+begin
+  orang_tua.Show;
 end;
 
 end.

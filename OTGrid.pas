@@ -33,6 +33,8 @@ type
     lbl11: TLabel;
     edtStatusHUB: TEdit;
     lbl1: TLabel;
+    btnLDOT: TButton;
+    procedure btnLDOTClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,5 +47,24 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Torang_tua.btnLDOTClick(Sender: TObject);
+begin
+  qryOT.SQL.Clear;
+  qryOT.SQL.Add('select * from orang_tua');
+  qryOT.Open;
+
+  dbgrdOT.Columns[0].Width:=20;
+  dbgrdOT.Columns[1].Width:=110;
+  dbgrdOT.Columns[2].Width:=75;
+  dbgrdOT.Columns[3].Width:=85;
+  dbgrdOT.Columns[4].Width:=110;
+  dbgrdOT.Columns[5].Width:=65;
+  dbgrdOT.Columns[6].Width:=150;
+  dbgrdOT.Columns[7].Width:=70;
+  dbgrdOT.Columns[8].Width:=75;
+  dbgrdOT.Columns[9].Width:=150;
+
+end;
 
 end.

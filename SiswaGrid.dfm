@@ -156,6 +156,7 @@ object FSiswa: TFSiswa
     Height = 33
     Caption = 'View Orang Tua'
     TabOrder = 4
+    OnClick = VOTClick
   end
   object VWK: TButton
     Left = 336
@@ -164,6 +165,7 @@ object FSiswa: TFSiswa
     Height = 33
     Caption = 'View wakil Kelas'
     TabOrder = 5
+    OnClick = VWKClick
   end
   object HSiswa: TButton
     Left = 816

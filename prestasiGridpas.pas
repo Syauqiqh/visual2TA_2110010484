@@ -21,6 +21,7 @@ type
     dtpLaporan: TDateTimePicker;
     btnLDPrestasi: TButton;
     dsPrestasi: TDataSource;
+    procedure btnLDPrestasiClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,5 +34,16 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure Tprestasi.btnLDPrestasiClick(Sender: TObject);
+begin
+  qryPrestasi.SQL.Clear;
+  qryPrestasi.SQL.Add('select * from pelanggaran');
+  qryPrestasi.Open;
+
+  dbgrdPrestasi.Columns[0].Width:=20;
+  dbgrdPrestasi.Columns[1].Width:=60;
+  dbgrdPrestasi.Columns[2].Width:=60;
+end;
 
 end.

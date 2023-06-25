@@ -81,6 +81,7 @@ object laporan: Tlaporan
     Top = 200
     Width = 929
     Height = 153
+    DataSource = dsLaporan
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -103,14 +104,16 @@ object laporan: Tlaporan
     Height = 33
     Caption = 'View prestasi'
     TabOrder = 2
+    OnClick = VprestasiClick
   end
   object VPelanggaran: TButton
     Left = 744
-    Top = 104
+    Top = 112
     Width = 97
     Height = 33
     Caption = 'View Pelanggaran'
     TabOrder = 3
+    OnClick = VPelanggaranClick
   end
   object TLaporan: TButton
     Left = 744
@@ -195,16 +198,38 @@ object laporan: Tlaporan
     Height = 21
     TabOrder = 14
   end
+  object btnLDLaporan: TButton
+    Left = 848
+    Top = 112
+    Width = 89
+    Height = 33
+    Caption = 'Load Data'
+    TabOrder = 15
+    OnClick = btnLDLaporanClick
+  end
   object dsLaporan: TDataSource
+    DataSet = qryLaporan
     Left = 600
     Top = 136
   end
   object conLapporan: TADOConnection
+    Connected = True
+    ConnectionString = 
+      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
+      ' Security Info=False'
+    LoginPrompt = False
+    Mode = cmShareDenyNone
+    Provider = 'Microsoft.Jet.OLEDB.4.0'
     Left = 544
     Top = 136
   end
   object qryLaporan: TADOQuery
+    Active = True
+    Connection = conLapporan
+    CursorType = ctStatic
     Parameters = <>
+    SQL.Strings = (
+      'select * from laporan')
     Left = 496
     Top = 136
   end

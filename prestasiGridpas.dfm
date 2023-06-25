@@ -99,6 +99,7 @@ object prestasi: Tprestasi
     Height = 33
     Caption = 'Load Data'
     TabOrder = 6
+    OnClick = btnLDPrestasiClick
   end
   object conPrestasi: TADOConnection
     Connected = True
