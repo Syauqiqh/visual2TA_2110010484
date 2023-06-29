@@ -54,6 +54,6 @@ procedure TFmenus.laporan1Click(Sender: TObject);
 begin
 laporan.Show;
 end;
-
+ 
 end.
 

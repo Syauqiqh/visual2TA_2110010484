@@ -1,8 +1,8 @@
 object wali_kelas: Twali_kelas
   Left = 353
   Top = 178
-  Width = 962
-  Height = 344
+  Width = 922
+  Height = 381
   Caption = 'wali_kelas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -35,15 +35,15 @@ object wali_kelas: Twali_kelas
     Caption = 'Telp'
   end
   object lbl4: TLabel
-    Left = 360
-    Top = 16
+    Left = 16
+    Top = 144
     Width = 33
     Height = 13
     Caption = 'Alamat'
   end
   object lbl5: TLabel
     Left = 360
-    Top = 48
+    Top = 8
     Width = 62
     Height = 13
     Caption = 'Tempat Lahir'
@@ -57,22 +57,29 @@ object wali_kelas: Twali_kelas
   end
   object lbl6: TLabel
     Left = 360
-    Top = 80
+    Top = 40
     Width = 61
     Height = 13
     Caption = 'Tanggal lahir'
   end
   object lbl8: TLabel
     Left = 360
-    Top = 112
+    Top = 72
     Width = 89
     Height = 13
     Caption = 'Tingkat Pendidikan'
   end
+  object lbl9: TLabel
+    Left = 360
+    Top = 104
+    Width = 30
+    Height = 13
+    Caption = 'status'
+  end
   object dbgrdWK: TDBGrid
-    Left = 8
-    Top = 152
-    Width = 881
+    Left = 16
+    Top = 192
+    Width = 873
     Height = 137
     DataSource = dsWK
     TabOrder = 0
@@ -89,6 +96,7 @@ object wali_kelas: Twali_kelas
     Height = 33
     Caption = 'Tambah Wali Kelas'
     TabOrder = 1
+    OnClick = TWKClick
   end
   object HWK: TButton
     Left = 752
@@ -120,15 +128,15 @@ object wali_kelas: Twali_kelas
     TabOrder = 5
   end
   object edtAlamat: TEdit
-    Left = 456
-    Top = 16
+    Left = 88
+    Top = 144
     Width = 257
     Height = 21
     TabOrder = 6
   end
   object edtTL: TEdit
     Left = 456
-    Top = 48
+    Top = 8
     Width = 257
     Height = 21
     TabOrder = 7
@@ -147,7 +155,7 @@ object wali_kelas: Twali_kelas
   end
   object dtpSiswa: TDateTimePicker
     Left = 456
-    Top = 80
+    Top = 40
     Width = 257
     Height = 21
     Date = 45095.438990266200000000
@@ -156,7 +164,7 @@ object wali_kelas: Twali_kelas
   end
   object edtTP: TEdit
     Left = 456
-    Top = 112
+    Top = 72
     Width = 257
     Height = 21
     TabOrder = 10
@@ -170,30 +178,39 @@ object wali_kelas: Twali_kelas
     TabOrder = 11
     OnClick = btnLDWKClick
   end
-  object conWK: TADOConnection
-    Connected = True
-    ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
-      ' Security Info=False'
-    LoginPrompt = False
-    Mode = cmShareDenyNone
-    Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 856
-    Top = 24
-  end
-  object qryWK: TADOQuery
-    Active = True
-    Connection = conWK
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select * from wali_kelas')
-    Left = 904
-    Top = 24
+  object edtstatus: TEdit
+    Left = 456
+    Top = 104
+    Width = 257
+    Height = 21
+    TabOrder = 12
   end
   object dsWK: TDataSource
-    DataSet = qryWK
-    Left = 904
-    Top = 72
+    DataSet = zqryWK
+    Left = 856
+    Top = 120
+  end
+  object ZconWk: TZConnection
+    ControlsCodePage = cGET_ACP
+    UTF8StringsAsWideField = False
+    AutoEncodeStrings = False
+    Connected = True
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'tuakhir'
+    User = 'root'
+    Protocol = 'mysql'
+    LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
+    Left = 856
+    Top = 80
+  end
+  object zqryWK: TZQuery
+    Connection = ZconWk
+    Active = True
+    SQL.Strings = (
+      'select * from wali_kelas')
+    Params = <>
+    Left = 864
+    Top = 40
   end
 end

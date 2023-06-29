@@ -1,6 +1,6 @@
 object pelanggaran: Tpelanggaran
-  Left = 192
-  Top = 125
+  Left = 496
+  Top = 222
   Width = 531
   Height = 371
   Caption = 'pelanggaran'
@@ -54,6 +54,7 @@ object pelanggaran: Tpelanggaran
     Height = 33
     Caption = 'Tambah Pelanggaran'
     TabOrder = 1
+    OnClick = TPelanggaranClick
   end
   object HPelanggaran: TButton
     Left = 248
@@ -83,7 +84,7 @@ object pelanggaran: Tpelanggaran
       'Sedang'
       'Ringan')
   end
-  object dtpLaporan: TDateTimePicker
+  object dtpPelanggaran: TDateTimePicker
     Left = 64
     Top = 80
     Width = 145
@@ -101,30 +102,32 @@ object pelanggaran: Tpelanggaran
     TabOrder = 6
     OnClick = btnLDLaporanClick
   end
-  object qryPelanggaran: TADOQuery
-    Active = True
-    Connection = conPelanggaran
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select * from pelanggaran')
-    Left = 448
-    Top = 72
-  end
-  object conPelanggaran: TADOConnection
-    Connected = True
-    ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
-      ' Security Info=False'
-    LoginPrompt = False
-    Mode = cmShareDenyNone
-    Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 384
-    Top = 72
-  end
   object dsPelanggaran: TDataSource
-    DataSet = qryPelanggaran
+    DataSet = zqrypelanggaran
     Left = 328
     Top = 104
+  end
+  object Zconpelanggaran: TZConnection
+    ControlsCodePage = cGET_ACP
+    UTF8StringsAsWideField = False
+    AutoEncodeStrings = False
+    Connected = True
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'tuakhir'
+    User = 'root'
+    Protocol = 'mysql'
+    LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
+    Left = 376
+    Top = 96
+  end
+  object zqrypelanggaran: TZQuery
+    Connection = Zconpelanggaran
+    Active = True
+    SQL.Strings = (
+      'select * from pelanggaran')
+    Params = <>
+    Left = 448
+    Top = 88
   end
 end

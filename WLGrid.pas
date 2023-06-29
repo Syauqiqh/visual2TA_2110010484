@@ -4,15 +4,15 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, DB, ADODB, Grids, DBGrids, StdCtrls, ComCtrls;
+  Dialogs, DB, ADODB, Grids, DBGrids, StdCtrls, ComCtrls,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, ZAbstractConnection,
+  ZConnection;
 
 type
   Twali_kelas = class(TForm)
     dbgrdWK: TDBGrid;
-    conWK: TADOConnection;
     TWK: TButton;
     HWK: TButton;
-    qryWK: TADOQuery;
     lbl1: TLabel;
     lbl2: TLabel;
     lbl3: TLabel;
@@ -31,7 +31,12 @@ type
     edtTP: TEdit;
     dsWK: TDataSource;
     btnLDWK: TButton;
+    lbl9: TLabel;
+    edtstatus: TEdit;
+    ZconWk: TZConnection;
+    zqryWK: TZQuery;
     procedure btnLDWKClick(Sender: TObject);
+    procedure TWKClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,9 +52,9 @@ implementation
 
 procedure Twali_kelas.btnLDWKClick(Sender: TObject);
 begin
-  qryWK.SQL.Clear;
-  qryWK.SQL.Add('select * from wali_kelas');
-  qryWK.Open;
+  zqryWK.SQL.Clear;
+  zqryWK.SQL.Add('select * from wali_kelas');
+  zqryWK.Open;
 
   dbgrdWK.Columns[0].Width:=20;
   dbgrdWK.Columns[1].Width:=110;
@@ -60,6 +65,22 @@ begin
   dbgrdWK.Columns[6].Width:=150;
   dbgrdWK.Columns[7].Width:=70;
   dbgrdWK.Columns[8].Width:=75;
+end;
+
+procedure Twali_kelas.TWKClick(Sender: TObject);
+
+begin
+
+with wali_kelas.zqryWK do
+begin
+ zqryWK.SQL.Clear;
+ zqryWK.SQL.Add('insert into wali_kelas values(null,"'+edtNama.Text+'","'+edtNIk.Text+'","'+edtTelp.Text+'","'+cbbJK.Text+'","'+edtAlamat.Text+'","'+edtTL.Text+'","'+formatdatetime('yyyy-mm-dd',dtpSiswa.Date)+'","'+edtTP.Text+'","'+edtstatus.Text+'")');
+ zqryWK.ExecSQL;
+
+ zqryWK.SQL.Clear;
+ zqryWK.SQL.Add('select * wali_kelas');
+ Open;
+ ShowMessage('DATA BERHASIL DI SIMPAN');
 end;
 
 end.

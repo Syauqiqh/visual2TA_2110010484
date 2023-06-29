@@ -5,14 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ADODB, Grids, DBGrids, ExtCtrls, TeeProcs, TeEngine, Chart,
-  DbChart, StdCtrls, ComCtrls;
+  DbChart, StdCtrls, ComCtrls, ZAbstractConnection, ZConnection,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   Tlaporan = class(TForm)
     dbgridlaporan: TDBGrid;
     dsLaporan: TDataSource;
-    conLapporan: TADOConnection;
-    qryLaporan: TADOQuery;
     VRLaporan: TButton;
     Vprestasi: TButton;
     VPelanggaran: TButton;
@@ -37,9 +36,12 @@ type
     edtKeterangan: TEdit;
     edtStatus: TEdit;
     btnLDLaporan: TButton;
+    zqrylaporan: TZQuery;
+    Zconlaporan: TZConnection;
     procedure btnLDLaporanClick(Sender: TObject);
     procedure VprestasiClick(Sender: TObject);
     procedure VPelanggaranClick(Sender: TObject);
+    procedure TLaporanClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -57,9 +59,9 @@ uses pelanggaranGrid,prestasiGridpas;
 
 procedure Tlaporan.btnLDLaporanClick(Sender: TObject);
 begin
-  qryLaporan.SQL.Clear;
-  qryLaporan.SQL.Add('select * from laporan');
-  qryLaporan.Open;
+  zqrylaporan.SQL.Clear;
+  zqrylaporan.SQL.Add('select * from laporan');
+  zqrylaporan.Open;
 
   dbgridlaporan.Columns[0].Width:=65;
   dbgridlaporan.Columns[1].Width:=45;
@@ -81,6 +83,23 @@ end;
 procedure Tlaporan.VPelanggaranClick(Sender: TObject);
 begin
 pelanggaran.Show;
+end;
+
+procedure Tlaporan.TLaporanClick(Sender: TObject);
+
+
+begin
+
+with laporan.zqrylaporan do
+begin
+ zqrylaporan.SQL.Clear;
+ zqrylaporan.SQL.Add('insert into laporan values(null,"'+formatdatetime('yyyy-mm-dd',dtpLaporan.date)+'","'+cbbSemester.Text+'","'+edtSiswaId.Text+'","'+edtWK.Text+'","'+edtOT.Text+'","'+edtPrestasi.Text+'","'+edtPelanggaran.Text+'","'+edtKeterangan.Text+'","'+edtStatus.Text+'")');
+ zqrylaporan.ExecSQL;
+
+ zqrylaporan.SQL.Clear;
+ zqrylaporan.SQL.Add('select * from laporan');
+ Open;
+ ShowMessage('DATA BERHASIL DI SIMPAN');
 end;
 
 end.

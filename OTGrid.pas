@@ -5,14 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DB, ADODB, ExtCtrls, TeeProcs, TeEngine, Chart,
-  DbChart, Grids, DBGrids;
+  DbChart, Grids, DBGrids, ZAbstractConnection, ZConnection,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   Torang_tua = class(TForm)
     dsOT: TDataSource;
     dbgrdOT: TDBGrid;
-    conOT: TADOConnection;
-    qryOT: TADOQuery;
     TOT: TButton;
     HOT: TButton;
     lbl3: TLabel;
@@ -34,7 +33,11 @@ type
     edtStatusHUB: TEdit;
     lbl1: TLabel;
     btnLDOT: TButton;
+    zqryOT: TZQuery;
+    ZconOT: TZConnection;
     procedure btnLDOTClick(Sender: TObject);
+    procedure TOTClick(Sender: TObject);
+    procedure edtTPOTChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,9 +53,9 @@ implementation
 
 procedure Torang_tua.btnLDOTClick(Sender: TObject);
 begin
-  qryOT.SQL.Clear;
-  qryOT.SQL.Add('select * from orang_tua');
-  qryOT.Open;
+  zqryOT.SQL.Clear;
+  zqryOT.SQL.Add('select * from orang_tua');
+  zqryOT.Open;
 
   dbgrdOT.Columns[0].Width:=20;
   dbgrdOT.Columns[1].Width:=110;
@@ -65,6 +68,22 @@ begin
   dbgrdOT.Columns[8].Width:=75;
   dbgrdOT.Columns[9].Width:=150;
 
+end;
+
+procedure Torang_tua.TOTClick(Sender: TObject);
+
+begin
+
+with orang_tua.zqryOT do
+begin
+ zqryOT.SQL.Clear;
+ zqryOT.SQL.Add('insert into orang_tua values(null,"'+edtNamaOT.Text+'","'+edtNIKOT.Text+'","'+edtTPOT.Text+'","'+edtpekerjaan.Text+'","'+edtTelp.Text+'","'+edtAlamat.Text+'","'+cbbJKOT.Text+'","'+edtStatus.Text+'","'+edtStatusHUB.Text+'")');
+ zqryOT.ExecSQL;
+
+ zqryOT.SQL.Clear;
+ zqryOT.SQL.Add('select * from orang_tua');
+ Open;
+ ShowMessage('DATA BERHASIL DI SIMPAN');
 end;
 
 end.

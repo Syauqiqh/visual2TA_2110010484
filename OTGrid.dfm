@@ -1,8 +1,8 @@
 object orang_tua: Torang_tua
-  Left = 432
-  Top = 239
+  Left = 388
+  Top = 171
   Width = 928
-  Height = 376
+  Height = 362
   Caption = 'orang_tua'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -96,6 +96,7 @@ object orang_tua: Torang_tua
     Height = 33
     Caption = 'Tambah Orang tua'
     TabOrder = 1
+    OnClick = TOTClick
   end
   object HOT: TButton
     Left = 768
@@ -183,29 +184,30 @@ object orang_tua: Torang_tua
     OnClick = btnLDOTClick
   end
   object dsOT: TDataSource
-    DataSet = qryOT
+    DataSet = zqryOT
     Left = 8
     Top = 8
   end
-  object conOT: TADOConnection
-    Connected = True
-    ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
-      ' Security Info=False'
-    LoginPrompt = False
-    Mode = cmShareDenyNone
-    Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 7
-    Top = 128
-  end
-  object qryOT: TADOQuery
+  object zqryOT: TZQuery
+    Connection = ZconOT
     Active = True
-    Connection = conOT
-    CursorType = ctStatic
-    Parameters = <>
     SQL.Strings = (
       'select * from orang_tua')
-    Left = 8
+    Params = <>
     Top = 72
+  end
+  object ZconOT: TZConnection
+    ControlsCodePage = cGET_ACP
+    UTF8StringsAsWideField = False
+    AutoEncodeStrings = False
+    Connected = True
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'tuakhir'
+    User = 'root'
+    Protocol = 'mysql'
+    LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
+    Left = 8
+    Top = 128
   end
 end

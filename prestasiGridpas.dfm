@@ -54,6 +54,7 @@ object prestasi: Tprestasi
     Height = 33
     Caption = 'Tambah Prestasi'
     TabOrder = 1
+    OnClick = TPrestasiClick
   end
   object HPrestasi: TButton
     Left = 232
@@ -83,7 +84,7 @@ object prestasi: Tprestasi
       'Sedang'
       'Ringan')
   end
-  object dtpLaporan: TDateTimePicker
+  object dtpPrestasi: TDateTimePicker
     Left = 64
     Top = 80
     Width = 145
@@ -101,30 +102,32 @@ object prestasi: Tprestasi
     TabOrder = 6
     OnClick = btnLDPrestasiClick
   end
-  object conPrestasi: TADOConnection
-    Connected = True
-    ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
-      ' Security Info=False'
-    LoginPrompt = False
-    Mode = cmShareDenyNone
-    Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 392
-    Top = 64
-  end
-  object qryPrestasi: TADOQuery
-    Active = True
-    Connection = conPrestasi
-    CursorType = ctStatic
-    Parameters = <>
-    SQL.Strings = (
-      'select * from prestasi')
-    Left = 344
-    Top = 64
-  end
   object dsPrestasi: TDataSource
-    DataSet = qryPrestasi
+    DataSet = zqryprestasi
     Left = 448
     Top = 64
+  end
+  object Zconprestasi: TZConnection
+    ControlsCodePage = cGET_ACP
+    UTF8StringsAsWideField = False
+    AutoEncodeStrings = False
+    Connected = True
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'tuakhir'
+    User = 'root'
+    Protocol = 'mysql'
+    LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
+    Left = 336
+    Top = 56
+  end
+  object zqryprestasi: TZQuery
+    Connection = Zconprestasi
+    Active = True
+    SQL.Strings = (
+      'select * from prestasi')
+    Params = <>
+    Left = 400
+    Top = 72
   end
 end

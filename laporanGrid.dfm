@@ -122,6 +122,7 @@ object laporan: Tlaporan
     Height = 33
     Caption = 'Tambah Laporan'
     TabOrder = 4
+    OnClick = TLaporanClick
   end
   object HLaporan: TButton
     Left = 848
@@ -136,8 +137,8 @@ object laporan: Tlaporan
     Top = 8
     Width = 241
     Height = 21
-    Date = 45095.481726238420000000
-    Time = 45095.481726238420000000
+    Date = 45102.481726238420000000
+    Time = 45102.481726238420000000
     TabOrder = 6
   end
   object cbbSemester: TComboBox
@@ -147,7 +148,6 @@ object laporan: Tlaporan
     Height = 21
     ItemHeight = 13
     TabOrder = 7
-    Text = 'Semester'
   end
   object edtSiswaId: TEdit
     Left = 128
@@ -208,29 +208,31 @@ object laporan: Tlaporan
     OnClick = btnLDLaporanClick
   end
   object dsLaporan: TDataSource
-    DataSet = qryLaporan
+    DataSet = zqrylaporan
     Left = 600
     Top = 136
   end
-  object conLapporan: TADOConnection
-    Connected = True
-    ConnectionString = 
-      'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=siswadb.mdb;Persist' +
-      ' Security Info=False'
-    LoginPrompt = False
-    Mode = cmShareDenyNone
-    Provider = 'Microsoft.Jet.OLEDB.4.0'
-    Left = 544
-    Top = 136
-  end
-  object qryLaporan: TADOQuery
+  object zqrylaporan: TZQuery
+    Connection = Zconlaporan
     Active = True
-    Connection = conLapporan
-    CursorType = ctStatic
-    Parameters = <>
     SQL.Strings = (
       'select * from laporan')
-    Left = 496
-    Top = 136
+    Params = <>
+    Left = 408
+    Top = 152
+  end
+  object Zconlaporan: TZConnection
+    ControlsCodePage = cGET_ACP
+    UTF8StringsAsWideField = False
+    AutoEncodeStrings = False
+    Connected = True
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'tuakhir'
+    User = 'root'
+    Protocol = 'mysql'
+    LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
+    Left = 472
+    Top = 152
   end
 end

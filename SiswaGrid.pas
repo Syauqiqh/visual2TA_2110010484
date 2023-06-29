@@ -46,11 +46,12 @@ type
     edtEsiswaOT: TEdit;
     edtEsiswaLaporan: TEdit;
     edtEsiswaStatus: TEdit;
-    consiswa: TADOConnection;
-    qrysiswa: TADOQuery;
+    zqrysiswa: TZQuery;
+    Zconsiswa: TZConnection;
     procedure LDSiswaClick(Sender: TObject);
     procedure VWKClick(Sender: TObject);
     procedure VOTClick(Sender: TObject);
+    procedure tambahSiswaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -68,9 +69,9 @@ uses WLGrid,OTGrid;
 
 procedure TFSiswa.LDSiswaClick(Sender: TObject);
 begin
-  qrysiswa.SQL.Clear;
-  qrysiswa.SQL.Add('select * from siswa');
-  qrysiswa.Open;
+  zqrysiswa.SQL.Clear;
+  zqrysiswa.SQL.Add('select * from siswa');
+  zqrysiswa.Open;
 
   dbgridSiswa.Columns[0].Width:=20;
   dbgridSiswa.Columns[1].Width:=60;
@@ -98,6 +99,22 @@ end;
 procedure TFSiswa.VOTClick(Sender: TObject);
 begin
   orang_tua.Show;
+end;
+
+procedure TFSiswa.tambahSiswaClick(Sender: TObject);
+
+begin
+
+with FSiswa.zqrysiswa do
+begin
+ zqrysiswa.SQL.Clear;
+ zqrysiswa.SQL.Add('insert into siswa values(null,"'+edtEnis.Text+'","'+edtEnisn.Text+'","'+edtENS.Text+'","'+edtEnik.Text+'","'+edtETL.Text+'","'+formatdatetime('yyyy-mm-dd',dtpSiswa.Date)+'","'+cbbJKSiwa.Text+'","'+cbbJurusan.Text+'","'+edtEWK.Text+'","'+kehadiran.Text+'","'+edtEalamat.Text+'","'+edtEHP.Text+'","'+edtEsiswaOT.Text+'","'+edtEsiswaLaporan.Text+'","'+edtEsiswaStatus.Text+'")');
+ zqrysiswa.ExecSQL;
+
+ zqrysiswa.SQL.Clear;
+ zqrysiswa.SQL.Add('select * from siswa');
+ Open;
+ ShowMessage('DATA BERHASIL DI SIMPAN');
 end;
 
 end.
