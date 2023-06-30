@@ -37,6 +37,10 @@ type
     zqryWK: TZQuery;
     procedure btnLDWKClick(Sender: TObject);
     procedure TWKClick(Sender: TObject);
+    procedure bersihWaliKelas;
+    procedure posisiawalWaliKelas;
+    procedure HWKClick(Sender: TObject);
+    procedure walikelasonclick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -67,6 +71,57 @@ begin
   dbgrdWK.Columns[8].Width:=75;
 end;
 
+procedure TFSiswa.bersihWaliKelas;
+begin
+edtNama.Clear;
+edtNIk.Clear;
+edtTelp.Clear;
+cbbJK.Clear;
+edtAlamat.Clear;
+edtTL.Clear;
+dtpSiswa.Clear;
+edtTP.Clear;
+edtstatus.Clear;
+end;
+
+procedure TFSiswa.posisiawalWaliKelas;
+begin
+bersihWaliKelas;
+edtNama.Enabled:= True;
+edtNIk.Enabled:= True;
+edtTelp.Enabled:= True;
+cbbJK.Enabled:= True;
+edtAlamat.Enabled:= True;
+edtTL.Enabled:= True;
+dtpSiswa.Enabled:= True;
+edtTP.Enabled:= True;
+edtstatus.Enabled:= True;
+TWK.Enabled:= True;
+HWK.Enabled:= False;
+btnLDWK.Enabled:= True;
+end;
+
+procedure Twali_kelas.HWKClick(Sender: TObject);
+begin
+if MessageDlg('APAKAH YAKIN MENGHAPUS DATA INI?',mtWarning,[mbYes,mbNo],0)= mryes then
+begin
+zqryWK.SQL.Clear;
+zqryWK.SQL.Add(' delete from wali_kelas where id="'+id+'"');
+zqryWK.ExecSQL;
+zqryWK.SQL.Clear;
+zqryWK.SQL.Add('select * from wali_kelas');
+zqryWK.Open;
+ShowMessage('DATA BERHASIL DIHAPUS');
+posisiawalSiswa;
+end else
+begin
+ShowMessage('DATA BATAL DIHAPUS');
+posisiawalWaliKelas;
+end;
+end;
+
+
+
 procedure Twali_kelas.TWKClick(Sender: TObject);
 
 begin
@@ -83,4 +138,18 @@ begin
  ShowMessage('DATA BERHASIL DI SIMPAN');
 end;
 
+end;
+procedure Twali_kelas.walikelasonclick(Column: TColumn);
+begin
+id:= zqryWK.Fields[0].AsString;
+edtNama.Text:= zqryWK.Fields[1].AsString;
+edtNIk.Text:= zqryWK.Fields[2].AsString;
+edtTelp.Text:= zqryWK.Fields[3].AsString;
+cbbJK.Text:= zqryWK.Fields[4].AsString;
+edtAlamat.Text:= zqryWK.Fields[5].AsString;
+edtTL.Text:= zqryWK.Fields[6].AsString;
+dtpSiswa.Text:= zqryWK.Fields[7].AsString;
+edtTP.Text:= zqryWK.Fields[8].AsString;
+edtstatus.Text:= zqryWK.Fields[9].AsString;
+end;
 end.

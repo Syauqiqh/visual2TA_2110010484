@@ -1,6 +1,6 @@
 object laporan: Tlaporan
-  Left = 221
-  Top = 291
+  Left = 197
+  Top = 136
   Width = 973
   Height = 415
   Caption = 'Tambah Laporan'
@@ -88,6 +88,7 @@ object laporan: Tlaporan
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = laporanonclick
   end
   object VRLaporan: TButton
     Left = 848

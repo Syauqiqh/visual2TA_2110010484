@@ -52,6 +52,13 @@ type
     procedure VWKClick(Sender: TObject);
     procedure VOTClick(Sender: TObject);
     procedure tambahSiswaClick(Sender: TObject);
+    procedure siswacellclick(Column: TColumn);
+    procedure siswacellclick(Column: TColumn);
+    procedure siswaclick(Column: TColumn);
+    procedure siswaoncellclick(Column: TColumn);
+    procedure bersihSiswa;
+    procedure posisiawalSiswa;
+    procedure HSiswaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -91,6 +98,50 @@ begin
 
 end;
 
+procedure TFSiswa.bersihSiswa;
+begin
+edtEnis.Clear;
+edtEnisn.Clear;
+edtENS.Clear;
+edtEnik.Clear;
+edtETL.Clear;
+dtpSiswa.Clear;
+cbbJKSiwa.Clear;
+cbbJurusan.Clear;
+edtEWK.Clear;
+edtEalamat.Clear;
+edtEHP.Clear;
+edtEsiswaOT.Clear;
+edtEsiswaLaporan.Clear;
+edtEsiswaStatus.Clear;
+end;
+
+procedure TFSiswa.posisiawalSiswa;
+begin
+bersihSiswa;
+VRSiswa.Enabled:= True;
+tambahSiswa.Enabled:= True;
+VWK.Enabled:= True;
+LDSiswa.Enabled:= True;
+VOT.Enabled:= True;
+HSiswa.Enabled:= False;
+edtEnis.Enabled:= True;
+edtEnisn.Enabled:= True;
+edtENS.Enabled:= True;
+edtEnik.Enabled:= True;
+edtETL.Enabled:= True;
+dtpSiswa.Enabled:= True;
+cbbJKSiwa.Enabled:= True;
+cbbJurusan.Enabled:= True;
+edtEWK.Enabled:= True;
+edtEalamat.Enabled:= True;
+edtEHP.Enabled:= True;
+edtEsiswaOT.Enabled:= True;
+edtEsiswaLaporan.Enabled:= True;
+edtEsiswaStatus.Enabled:= True;
+end;
+
+
 procedure TFSiswa.VWKClick(Sender: TObject);
 begin
 wali_kelas.Show;
@@ -108,13 +159,51 @@ begin
 with FSiswa.zqrysiswa do
 begin
  zqrysiswa.SQL.Clear;
- zqrysiswa.SQL.Add('insert into siswa values(null,"'+edtEnis.Text+'","'+edtEnisn.Text+'","'+edtENS.Text+'","'+edtEnik.Text+'","'+edtETL.Text+'","'+formatdatetime('yyyy-mm-dd',dtpSiswa.Date)+'","'+cbbJKSiwa.Text+'","'+cbbJurusan.Text+'","'+edtEWK.Text+'","'+kehadiran.Text+'","'+edtEalamat.Text+'","'+edtEHP.Text+'","'+edtEsiswaOT.Text+'","'+edtEsiswaLaporan.Text+'","'+edtEsiswaStatus.Text+'")');
+ zqrysiswa.SQL.Add('insert into siswa values(null,"'+edtEnis.Text+'","'+edtEnisn.Text+'","'+edtENS.Text+'","'+edtEnik.Text+'","'+edtETL.Text+'","'+formatdatetime('yyyy-mm-dd',dtpSiswa.Date)+'","'+cbbJKSiwa.Text+'","'+cbbJurusan.Text+'","'+edtEWK.Text+'","'+edtEalamat.Text+'","'+edtEHP.Text+'","'+edtEsiswaOT.Text+'","'+edtEsiswaLaporan.Text+'","'+edtEsiswaStatus.Text+'")');
  zqrysiswa.ExecSQL;
 
  zqrysiswa.SQL.Clear;
  zqrysiswa.SQL.Add('select * from siswa');
  Open;
  ShowMessage('DATA BERHASIL DI SIMPAN');
+end;
+
+end;
+procedure TFSiswa.siswacellclick(Column: TColumn);
+begin
+id:= zqrysiswa.Fields[0].AsString; 
+edtEnis.Text:= zqrysiswa.Fields[1].AsString;
+edtEnisn.Text:= zqrysiswa.Fields[2].AsString;
+edtENS.Text:= zqrysiswa.Fields[3].AsString;
+edtEnik.Text:= zqrysiswa.Fields[4].AsString;
+edtETL.Text:= zqrysiswa.Fields[5].AsString;
+dtpSiswa.Text:= zqrysiswa.Fields[6].AsString;
+cbbJKSiwa.Text:= zqrysiswa.Fields[7].AsString;
+cbbJurusan.Text:= zqrysiswa.Fields[8].AsString;
+edtEWK.Text:= zqrysiswa.Fields[9].AsString;
+edtEalamat.Text:= zqrysiswa.Fields[10].AsString;
+edtEHP.Text:= zqrysiswa.Fields[11].AsString;
+edtEsiswaOT.Text:= zqrysiswa.Fields[12].AsString;
+edtEsiswaLaporan.Text:= zqrysiswa.Fields[13].AsString;
+edtEsiswaStatus.Text:= zqrysiswa.Fields[14].AsString;
+end;
+
+procedure TFSiswa.HSiswaClick(Sender: TObject);
+begin
+if MessageDlg('APAKAH YAKIN MENGHAPUS DATA INI?',mtWarning,[mbYes,mbNo],0)= mryes then
+begin
+zqrysiswa.SQL.Clear;
+zqrysiswa.SQL.Add(' delete from siswa where id="'+id+'"');
+zqrysiswa.ExecSQL;
+zqrysiswa.SQL.Clear;
+zqrysiswa.SQL.Add('select * from siswa');
+zqrysiswa.Open;
+ShowMessage('DATA BERHASIL DIHAPUS');
+posisiawalSiswa;
+end else
+begin
+ShowMessage('DATA BATAL DIHAPUS');
+posisiawalSiswa;
 end;
 
 end.

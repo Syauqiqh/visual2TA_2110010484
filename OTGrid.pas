@@ -70,6 +70,34 @@ begin
 
 end;
 
+procedure Tlaporan.bersihOT;
+begin
+dtpLaporan.Clear;
+cbbSemester.Clear;
+edtSiswaId.Clear;
+edtWK.Clear;
+edtOT.Clear;
+edtPrestasi.Clear;
+edtKeterangan.Clear;
+edtStatus.Clear;
+end;
+
+procedure Tlaporan.posisiawalOT;
+begin
+bersihLaporan;
+dtpLaporan.Enabled:= True;
+cbbSemester.Enabled:= True;
+edtSiswaId.Enabled:= True;
+edtWK.Enabled:= True;
+edtOT.Enabled:= True;
+edtPrestasi.Enabled:= True;
+edtKeterangan.Enabled:= True;
+edtStatus.Enabled:= True;
+TLaporan.Enabled:= True;
+HLaporan.Enabled:= False;
+btnLDLapora.nabled:= True;
+end;
+
 procedure Torang_tua.TOTClick(Sender: TObject);
 
 begin

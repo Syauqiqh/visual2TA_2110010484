@@ -1,8 +1,8 @@
 object wali_kelas: Twali_kelas
-  Left = 353
-  Top = 178
+  Left = 193
+  Top = 134
   Width = 922
-  Height = 381
+  Height = 365
   Caption = 'wali_kelas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -88,6 +88,7 @@ object wali_kelas: Twali_kelas
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = walikelasonclick
   end
   object TWK: TButton
     Left = 744
@@ -99,12 +100,13 @@ object wali_kelas: Twali_kelas
     OnClick = TWKClick
   end
   object HWK: TButton
-    Left = 752
+    Left = 744
     Top = 64
-    Width = 97
+    Width = 105
     Height = 33
     Caption = 'Hapus Wali Kelas'
     TabOrder = 2
+    OnClick = HWKClick
   end
   object edtNama: TEdit
     Left = 88
@@ -170,9 +172,9 @@ object wali_kelas: Twali_kelas
     TabOrder = 10
   end
   object btnLDWK: TButton
-    Left = 751
+    Left = 743
     Top = 112
-    Width = 98
+    Width = 106
     Height = 33
     Caption = 'Load Data'
     TabOrder = 11

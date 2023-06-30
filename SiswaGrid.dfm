@@ -1,8 +1,8 @@
 object FSiswa: TFSiswa
   Left = 299
-  Top = 151
+  Top = 96
   Width = 997
-  Height = 453
+  Height = 508
   Caption = 'siswagrid'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -123,6 +123,7 @@ object FSiswa: TFSiswa
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = siswacellclick
   end
   object tambahSiswa: TButton
     Left = 176
@@ -175,6 +176,7 @@ object FSiswa: TFSiswa
     Height = 33
     Caption = 'Hapus Data'
     TabOrder = 6
+    OnClick = HSiswaClick
   end
   object edtEnis: TEdit
     Left = 120

@@ -42,6 +42,10 @@ type
     procedure VprestasiClick(Sender: TObject);
     procedure VPelanggaranClick(Sender: TObject);
     procedure TLaporanClick(Sender: TObject);
+    procedure laporancallclick(Column: TColumn);
+    procedure bersihLaporan;
+    procedure posisiawalLaporan;
+    procedure laporanonclick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -74,10 +78,37 @@ begin
   dbgridlaporan.Columns[8].Width:=150;
   dbgridlaporan.Columns[9].Width:=65;
 end;
+procedure Tlaporan.bersihLaporan;
+begin
+dtpLaporan.Clear;
+cbbSemester.Clear;
+edtSiswaId.Clear;
+edtWK.Clear;
+edtOT.Clear;
+edtPrestasi.Clear;
+edtKeterangan.Clear;
+edtStatus.Clear;
+end;
+
+procedure Tlaporan.posisiawalLaporan;
+begin
+bersihLaporan;
+dtpLaporan.Enabled:= True;
+cbbSemester.Enabled:= True;
+edtSiswaId.Enabled:= True;
+edtWK.Enabled:= True;
+edtOT.Enabled:= True;
+edtPrestasi.Enabled:= True;
+edtKeterangan.Enabled:= True;
+edtStatus.Enabled:= True;
+TLaporan.Enabled:= True;
+HLaporan.Enabled:= False;
+btnLDLapora.nabled:= True;
+end;
 
 procedure Tlaporan.VprestasiClick(Sender: TObject);
 begin
-prestasi.Show;
+prestasi.show;
 end;
 
 procedure Tlaporan.VPelanggaranClick(Sender: TObject);
@@ -102,4 +133,16 @@ begin
  ShowMessage('DATA BERHASIL DI SIMPAN');
 end;
 
+end;
+procedure Tlaporan.laporanonclick(Column: TColumn);
+begin
+id:= zqrylaporan.Fields[0].AsString;
+dtpLaporan.Text:= zqrylaporan.Fields[1].AsString;
+cbbSemester.Text:= zqryWK.Fields[2].AsString;
+edtSiswaId.Text:= zqryWK.Fields[3].AsString;
+edtWK.Text:= zqryWK.Fields[4].AsString;
+edtOT.Text:= zqryWK.Fields[5].AsString;
+edtKeterangan.Text:= zqryWK.Fields[6].AsString;
+edtStatus.Text:= zqryWK.Fields[7].AsString;
+end;
 end.
