@@ -6,7 +6,7 @@ uses
   WLGrid in 'WLGrid.pas' {wali_kelas},
   laporanGrid in 'laporanGrid.pas' {laporan},
   OTGrid in 'OTGrid.pas' {orang_tua},
-  prestasiGridpas in 'prestasiGridpas.pas' {prestasi},
+  prestasiGridpas in 'prestasiGridpas.pas' {Fprestasi},
   pelanggaranGrid in 'pelanggaranGrid.pas' {pelanggaran},
   Unitmenu in 'Unitmenu.pas' {Fmenus};
 
@@ -19,7 +19,7 @@ begin
   Application.CreateForm(Twali_kelas, wali_kelas);
   Application.CreateForm(Tlaporan, laporan);
   Application.CreateForm(Torang_tua, orang_tua);
-  Application.CreateForm(Tprestasi, prestasi);
+  Application.CreateForm(TFprestasi, Fprestasi);
   Application.CreateForm(Tpelanggaran, pelanggaran);
   Application.Run;
 end.

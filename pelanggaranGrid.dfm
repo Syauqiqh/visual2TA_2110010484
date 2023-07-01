@@ -1,6 +1,6 @@
 object pelanggaran: Tpelanggaran
-  Left = 496
-  Top = 222
+  Left = 320
+  Top = 137
   Width = 531
   Height = 371
   Caption = 'pelanggaran'
@@ -46,15 +46,16 @@ object pelanggaran: Tpelanggaran
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = pealnggaranonCllick
   end
-  object TPelanggaran: TButton
+  object btnTPelanggaran: TButton
     Left = 248
     Top = 64
     Width = 113
     Height = 33
     Caption = 'Tambah Pelanggaran'
     TabOrder = 1
-    OnClick = TPelanggaranClick
+    OnClick = btnTPelanggaranClick
   end
   object HPelanggaran: TButton
     Left = 248
@@ -63,6 +64,7 @@ object pelanggaran: Tpelanggaran
     Height = 33
     Caption = 'Hapus Pelanggaran'
     TabOrder = 2
+    OnClick = HPelanggaranClick
   end
   object edtpoin: TEdit
     Left = 64

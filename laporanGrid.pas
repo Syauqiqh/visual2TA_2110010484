@@ -46,6 +46,7 @@ type
     procedure bersihLaporan;
     procedure posisiawalLaporan;
     procedure laporanonclick(Column: TColumn);
+    procedure HLaporanClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,6 +87,7 @@ edtSiswaId.Clear;
 edtWK.Clear;
 edtOT.Clear;
 edtPrestasi.Clear;
+edtPelanggaran.Clear;
 edtKeterangan.Clear;
 edtStatus.Clear;
 end;
@@ -99,6 +101,7 @@ edtSiswaId.Enabled:= True;
 edtWK.Enabled:= True;
 edtOT.Enabled:= True;
 edtPrestasi.Enabled:= True;
+edtPelanggaran.Enabled:= True;
 edtKeterangan.Enabled:= True;
 edtStatus.Enabled:= True;
 TLaporan.Enabled:= True;
@@ -134,15 +137,38 @@ begin
 end;
 
 end;
+
 procedure Tlaporan.laporanonclick(Column: TColumn);
 begin
 id:= zqrylaporan.Fields[0].AsString;
 dtpLaporan.Text:= zqrylaporan.Fields[1].AsString;
-cbbSemester.Text:= zqryWK.Fields[2].AsString;
-edtSiswaId.Text:= zqryWK.Fields[3].AsString;
-edtWK.Text:= zqryWK.Fields[4].AsString;
-edtOT.Text:= zqryWK.Fields[5].AsString;
-edtKeterangan.Text:= zqryWK.Fields[6].AsString;
-edtStatus.Text:= zqryWK.Fields[7].AsString;
+cbbSemester.Text:= zqrylaporan.Fields[2].AsString;
+edtSiswaId.Text:= zqrylaporan.Fields[3].AsString;
+edtWK.Text:= zqrylaporan.Fields[4].AsString;
+edtOT.Text:= zqrylaporan.Fields[5].AsString;
+edtPrestasi.Text:= zqrylaporan.Fields[6].AsString;
+edtPelanggaran.Text:= zqrylaporan.Fields[7].AsString;
+edtKeterangan.Text:= zqrylaporan.Fields[8].AsString;
+edtStatus.Text:= zqrylaporan.Fields[9].AsString;
 end;
+
+procedure Tlaporan.HLaporanClick(Sender: TObject);
+begin
+if MessageDlg('APAKAH YAKIN MENGHAPUS DATA INI?',mtWarning,[mbYes,mbNo],0)= mryes then
+begin
+zqrylaporan.SQL.Clear;
+zqrylaporan.SQL.Add(' delete from laporan where id="'+id+'"');
+zqrylaporan.ExecSQL;
+zqrylaporan.SQL.Clear;
+zqrylaporan.SQL.Add('select * from laporan');
+zqrylaporan.Open;
+ShowMessage('DATA BERHASIL DIHAPUS');
+posisiawalLaporan;
+end else
+begin
+ShowMessage('DATA BATAL DIHAPUS');
+posisiawalLaporan;
+end;
+end;
+
 end.

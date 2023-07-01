@@ -1,6 +1,6 @@
 object orang_tua: Torang_tua
-  Left = 388
-  Top = 171
+  Left = 390
+  Top = 191
   Width = 928
   Height = 362
   Caption = 'orang_tua'
@@ -88,6 +88,7 @@ object orang_tua: Torang_tua
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = OTonClick
   end
   object TOT: TButton
     Left = 768
@@ -103,8 +104,9 @@ object orang_tua: Torang_tua
     Top = 64
     Width = 113
     Height = 33
-    Caption = 'Hapus Orabng Tua'
+    Caption = 'Hapus Orang Tua'
     TabOrder = 2
+    OnClick = HOTClick
   end
   object edtNamaOT: TEdit
     Left = 136

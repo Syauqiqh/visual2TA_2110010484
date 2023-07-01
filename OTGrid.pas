@@ -38,6 +38,8 @@ type
     procedure btnLDOTClick(Sender: TObject);
     procedure TOTClick(Sender: TObject);
     procedure edtTPOTChange(Sender: TObject);
+    procedure HOTClick(Sender: TObject);
+    procedure OTonClick(Column: TColumn);
   private
     { Private declarations }
   public
@@ -72,31 +74,53 @@ end;
 
 procedure Tlaporan.bersihOT;
 begin
-dtpLaporan.Clear;
-cbbSemester.Clear;
-edtSiswaId.Clear;
-edtWK.Clear;
-edtOT.Clear;
-edtPrestasi.Clear;
-edtKeterangan.Clear;
+edtNamaOT.Clear;
+edtNIKOT.Clear;
+edtTPOT.Clear;
+edtpekerjaan.Clear;
+edtTelp.Clear;
+edtAlamat.Clear;
+cbbJKOT.Clear;
 edtStatus.Clear;
+edtStatusHUB.Clear;
 end;
 
 procedure Tlaporan.posisiawalOT;
 begin
-bersihLaporan;
-dtpLaporan.Enabled:= True;
-cbbSemester.Enabled:= True;
-edtSiswaId.Enabled:= True;
-edtWK.Enabled:= True;
-edtOT.Enabled:= True;
-edtPrestasi.Enabled:= True;
-edtKeterangan.Enabled:= True;
+bersihOT;
+edtNamaOT.Enabled:= True;
+edtNIKOT.Enabled:= True;
+edtpekerjaan.Enabled:= True;
+edtTPOT.Enabled:= True;
+edtTelp.Enabled:= True;
+edtAlamat.Enabled:= True;
+cbbJKOT.Enabled:= True;
 edtStatus.Enabled:= True;
+edtStatusHUB.Enabled:= True;
+
 TLaporan.Enabled:= True;
 HLaporan.Enabled:= False;
 btnLDLapora.nabled:= True;
 end;
+procedure Torang_tua.HOTClick(Sender: TObject);
+begin
+ if MessageDlg('APAKAH YAKIN MENGHAPUS DATA INI?',mtWarning,[mbYes,mbNo],0)= mryes then
+begin
+zqryOT.SQL.Clear;
+zqryOT.SQL.Add(' delete from orang_tua where id="'+id+'"');
+zqryOT.ExecSQL;
+zqryOT.SQL.Clear;
+zqryOT.SQL.Add('select * from orang_tua');
+zqryOT.Open;
+ShowMessage('DATA BERHASIL DIHAPUS');
+posisiawalOT;
+end else
+begin
+ShowMessage('DATA BATAL DIHAPUS');
+posisiawalOT;
+end;
+end;
+
 
 procedure Torang_tua.TOTClick(Sender: TObject);
 
@@ -113,5 +137,19 @@ begin
  Open;
  ShowMessage('DATA BERHASIL DI SIMPAN');
 end;
+end;
 
+procedure Torang_tua.OTonClick(Column: TColumn);
+begin
+id:= zqryOT.Fields[0].AsString;
+edtNamaOT.Text:= zqryOT.Fields[1].AsString;
+edtNIKOT.Text:= zqryOT.Fields[2].AsString;
+edtTPOT.Text:= zqryOT.Fields[3].AsString;
+edtpekerjaan.Text:= zqryOT.Fields[4].AsString;
+edtTelp.Text:= zqryOT.Fields[5].AsString;
+edtAlamat.Text:= zqryOT.Fields[6].AsString;
+cbbJKOT.Text:= zqryOT.Fields[7].AsString;
+edtStatus.Text:= zqryOT.Fields[8].AsString;
+edtStatusHUB.Text:= zqryOT.Fields[9].AsString;
+end;
 end.

@@ -1,6 +1,6 @@
 object laporan: Tlaporan
-  Left = 197
-  Top = 136
+  Left = 375
+  Top = 128
   Width = 973
   Height = 415
   Caption = 'Tambah Laporan'
@@ -132,6 +132,7 @@ object laporan: Tlaporan
     Height = 33
     Caption = 'Hapus Laporan'
     TabOrder = 5
+    OnClick = HLaporanClick
   end
   object dtpLaporan: TDateTimePicker
     Left = 128

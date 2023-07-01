@@ -11,7 +11,7 @@ uses
 type
   Tpelanggaran = class(TForm)
     dbgrdPelanggaran: TDBGrid;
-    TPelanggaran: TButton;
+    btnTPelanggaran: TButton;
     HPelanggaran: TButton;
     edtpoin: TEdit;
     lbl1: TLabel;
@@ -24,7 +24,11 @@ type
     Zconpelanggaran: TZConnection;
     zqrypelanggaran: TZQuery;
     procedure btnLDLaporanClick(Sender: TObject);
-    procedure TPelanggaranClick(Sender: TObject);
+    procedure btnTPelanggaranClick(Sender: TObject);
+    procedure bersihpelanggaran;
+    procedure posisiawalpelanggaran;
+    procedure pealnggaranonCllick(Column: TColumn);
+    procedure HPelanggaranClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,9 +53,25 @@ begin
   dbgrdPelanggaran.Columns[2].Width:=60;
 end;
 
-procedure Tpelanggaran.TPelanggaranClick(Sender: TObject);
 
+procedure Tpelanggaran.bersihpelanggaran;
+begin
+edtpoin.Clear;
+cbbJenis.Clear;
+dtpPelanggaran.Clear;
+end;
 
+procedure Tpelanggaran.posisiawalpelanggaran;
+begin
+bersihpelanggaran;
+edtpoin.Enabled:= True;
+cbbJenis.Enabled:= True;
+dtpPelanggaran.Enabled:= True;
+HPelanggaran.Enabled:= False;
+btnTPelanggaran.Enabled:= True;
+end;
+
+procedure Tpelanggaran.btnTPelanggaranClick(Sender: TObject);
 begin
 
 with pelanggaran.zqrypelanggaran do
@@ -65,6 +85,35 @@ begin
  Open;
  ShowMessage('DATA BERHASIL DI SIMPAN');
 
+end;
+
+end;
+
+procedure Tpelanggaran.pealnggaranonCllick(Column: TColumn);
+begin
+id:= zqrypelanggaran.Fields[0].AsString;
+edtpoin.Text:= zqrypelanggaran.Fields[1].AsString;
+cbbJenis.Text:= zqrypelanggaran.Fields[2].AsString;
+dtpPelanggaran.Text:= zqrypelanggaran.Fields[3].AsString;
+end;
+
+procedure Tpelanggaran.HPelanggaranClick(Sender: TObject);
+begin
+if MessageDlg('APAKAH YAKIN MENGHAPUS DATA INI?',mtWarning,[mbYes,mbNo],0)= mryes then
+begin
+zqrypelanggaran.SQL.Clear;
+zqrypelanggaran.SQL.Add(' delete from pelanggaran where id="'+id+'"');
+zqrypelanggaran.ExecSQL;
+zqrypelanggaran.SQL.Clear;
+zqrypelanggaran.SQL.Add('select * from pelanggaran');
+zqrypelanggaran.Open;
+ShowMessage('DATA BERHASIL DIHAPUS');
+posisiawalpelanggaran;
+end else
+begin
+ShowMessage('DATA BATAL DIHAPUS');
+posisiawalpelanggaran;
+end;
 end;
 
 end.

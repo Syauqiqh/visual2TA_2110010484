@@ -1,9 +1,9 @@
-object prestasi: Tprestasi
+object Fprestasi: TFprestasi
   Left = 192
   Top = 125
   Width = 496
   Height = 343
-  Caption = 'prestasi'
+  Caption = 'Fprestasi'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -46,15 +46,16 @@ object prestasi: Tprestasi
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnCellClick = prestasionclick
   end
-  object TPrestasi: TButton
+  object btnTPrestasi: TButton
     Left = 232
     Top = 56
     Width = 97
     Height = 33
     Caption = 'Tambah Prestasi'
     TabOrder = 1
-    OnClick = TPrestasiClick
+    OnClick = btnTPrestasiClick
   end
   object HPrestasi: TButton
     Left = 232
@@ -63,6 +64,7 @@ object prestasi: Tprestasi
     Height = 33
     Caption = 'Hapus Prestasi'
     TabOrder = 2
+    OnClick = HPrestasiClick
   end
   object edtpoin: TEdit
     Left = 64
