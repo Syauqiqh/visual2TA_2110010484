@@ -97,6 +97,7 @@ object laporan: Tlaporan
     Height = 33
     Caption = 'View Report'
     TabOrder = 1
+    OnClick = VRLaporanClick
   end
   object Vprestasi: TButton
     Left = 744
@@ -209,6 +210,23 @@ object laporan: Tlaporan
     TabOrder = 15
     OnClick = btnLDLaporanClick
   end
+  object editLaporan: TButton
+    Left = 744
+    Top = 160
+    Width = 97
+    Height = 33
+    Caption = 'Edit'
+    TabOrder = 16
+    OnClick = editLaporanClick
+  end
+  object barulaporan: TButton
+    Left = 848
+    Top = 160
+    Width = 89
+    Height = 33
+    Caption = 'Baru'
+    TabOrder = 17
+  end
   object dsLaporan: TDataSource
     DataSet = zqrylaporan
     Left = 600
@@ -236,5 +254,35 @@ object laporan: Tlaporan
     LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
     Left = 472
     Top = 152
+  end
+  object frxdblaporan: TfrxDBDataset
+    UserName = 'frxdblaporan'
+    CloseDataSource = False
+    DataSource = dsLaporan
+    Left = 536
+    Top = 152
+  end
+  object frxlaporan: TfrxReport
+    Version = '4.0.11'
+    DataSet = frxdblaporan
+    DataSetName = 'frxdblaporan'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45109.856822465280000000
+    ReportOptions.LastChange = 45109.856822465280000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 656
+    Top = 144
+    Datasets = <>
+    Variables = <>
+    Style = <>
   end
 end

@@ -80,7 +80,6 @@ object Fprestasi: TFprestasi
     Height = 21
     ItemHeight = 13
     TabOrder = 4
-    Text = 'pilih jenis'
     Items.Strings = (
       'Berat'
       'Sedang'
@@ -104,10 +103,19 @@ object Fprestasi: TFprestasi
     TabOrder = 6
     OnClick = btnLDPrestasiClick
   end
+  object editprestasi: TButton
+    Left = 352
+    Top = 56
+    Width = 89
+    Height = 33
+    Caption = 'Edit'
+    TabOrder = 7
+    OnClick = editprestasiClick
+  end
   object dsPrestasi: TDataSource
     DataSet = zqryprestasi
-    Left = 448
-    Top = 64
+    Left = 336
+    Top = 88
   end
   object Zconprestasi: TZConnection
     ControlsCodePage = cGET_ACP
@@ -120,8 +128,8 @@ object Fprestasi: TFprestasi
     User = 'root'
     Protocol = 'mysql'
     LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
-    Left = 336
-    Top = 56
+    Left = 232
+    Top = 88
   end
   object zqryprestasi: TZQuery
     Connection = Zconprestasi
@@ -129,7 +137,7 @@ object Fprestasi: TFprestasi
     SQL.Strings = (
       'select * from prestasi')
     Params = <>
-    Left = 400
-    Top = 72
+    Left = 288
+    Top = 88
   end
 end

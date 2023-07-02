@@ -1,8 +1,8 @@
 object FSiswa: TFSiswa
-  Left = 299
-  Top = 96
+  Left = 251
+  Top = 130
   Width = 997
-  Height = 508
+  Height = 456
   Caption = 'siswagrid'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -105,7 +105,7 @@ object FSiswa: TFSiswa
     Caption = 'Id Laporan'
   end
   object lbl14: TLabel
-    Left = 464
+    Left = 472
     Top = 200
     Width = 31
     Height = 13
@@ -126,16 +126,16 @@ object FSiswa: TFSiswa
     OnCellClick = siswacellclick
   end
   object tambahSiswa: TButton
-    Left = 176
+    Left = 144
     Top = 232
     Width = 105
     Height = 33
-    Caption = 'Tambah data siswa'
+    Caption = 'Tambah siswa'
     TabOrder = 1
     OnClick = tambahSiswaClick
   end
   object LDSiswa: TButton
-    Left = 504
+    Left = 392
     Top = 232
     Width = 89
     Height = 33
@@ -144,15 +144,16 @@ object FSiswa: TFSiswa
     OnClick = LDSiswaClick
   end
   object VRSiswa: TButton
-    Left = 48
+    Left = 40
     Top = 232
     Width = 81
     Height = 33
     Caption = 'View Report'
     TabOrder = 3
+    OnClick = VRSiswaClick
   end
   object VOT: TButton
-    Left = 656
+    Left = 504
     Top = 232
     Width = 89
     Height = 33
@@ -161,7 +162,7 @@ object FSiswa: TFSiswa
     OnClick = VOTClick
   end
   object VWK: TButton
-    Left = 336
+    Left = 272
     Top = 232
     Width = 97
     Height = 33
@@ -170,7 +171,7 @@ object FSiswa: TFSiswa
     OnClick = VWKClick
   end
   object HSiswa: TButton
-    Left = 816
+    Left = 616
     Top = 232
     Width = 105
     Height = 33
@@ -229,7 +230,6 @@ object FSiswa: TFSiswa
     Height = 21
     ItemHeight = 13
     TabOrder = 13
-    Text = 'pilih jenis kelamin'
   end
   object cbbJurusan: TComboBox
     Left = 544
@@ -238,7 +238,6 @@ object FSiswa: TFSiswa
     Height = 21
     ItemHeight = 13
     TabOrder = 14
-    Text = 'pilih jurusan'
   end
   object edtEWK: TEdit
     Left = 544
@@ -282,6 +281,24 @@ object FSiswa: TFSiswa
     Height = 21
     TabOrder = 20
   end
+  object editSiswa: TButton
+    Left = 744
+    Top = 232
+    Width = 89
+    Height = 33
+    Caption = 'Edit'
+    TabOrder = 21
+    OnClick = editSiswaClick
+  end
+  object barusiswa: TButton
+    Left = 856
+    Top = 232
+    Width = 89
+    Height = 33
+    Caption = 'Baru'
+    TabOrder = 22
+    OnClick = barusiswaClick
+  end
   object dsSiswa: TDataSource
     DataSet = zqrysiswa
     Left = 408
@@ -309,5 +326,35 @@ object FSiswa: TFSiswa
     LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
     Left = 872
     Top = 32
+  end
+  object frxdbsiswa: TfrxDBDataset
+    UserName = 'frxdbsiswa'
+    CloseDataSource = False
+    DataSource = dsSiswa
+    Left = 912
+    Top = 144
+  end
+  object rprtsiswa: TfrxReport
+    Version = '4.0.11'
+    DataSet = frxdbsiswa
+    DataSetName = 'frxdbsiswa'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 45109.854276597220000000
+    ReportOptions.LastChange = 45109.854276597220000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 840
+    Top = 176
+    Datasets = <>
+    Variables = <>
+    Style = <>
   end
 end

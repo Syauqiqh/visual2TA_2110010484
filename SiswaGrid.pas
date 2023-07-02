@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DB, ADODB, ExtCtrls, TeeProcs, TeEngine, Chart,
   DbChart, Grids, DBGrids, ComCtrls, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, ZAbstractConnection, ZConnection;
+  ZDataset, ZAbstractConnection, ZConnection, frxClass, frxDBSet;
 
 type
   TFSiswa = class(TForm)
@@ -48,6 +48,10 @@ type
     edtEsiswaStatus: TEdit;
     zqrysiswa: TZQuery;
     Zconsiswa: TZConnection;
+    editSiswa: TButton;
+    frxdbsiswa: TfrxDBDataset;
+    rprtsiswa: TfrxReport;
+    barusiswa: TButton;
     procedure LDSiswaClick(Sender: TObject);
     procedure VWKClick(Sender: TObject);
     procedure VOTClick(Sender: TObject);
@@ -59,6 +63,9 @@ type
     procedure bersihSiswa;
     procedure posisiawalSiswa;
     procedure HSiswaClick(Sender: TObject);
+    procedure editSiswaClick(Sender: TObject);
+    procedure VRSiswaClick(Sender: TObject);
+    procedure barusiswaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -155,8 +162,63 @@ end;
 procedure TFSiswa.tambahSiswaClick(Sender: TObject);
 
 begin
-
-with FSiswa.zqrysiswa do
+if edtEnis.Text ='' then
+begin
+ShowMessage('NIS TIDAK BOLEH KOSONG!');
+end else
+if edtEnisn.Text ='' then
+begin
+ShowMessage('NISN TIDAK BOLEH KOSONG!');
+end else
+if edtENS.Text ='' then
+begin
+ShowMessage('NAMA SISWA TIDAK BOLEH KOSONG!');
+end else
+if edtEnik.Text ='' then
+begin
+ShowMessage('NIK TIDAK BOLEH KOSONG!');
+end else
+if edtETL.Text ='' then
+begin
+ShowMessage('TEMPAT LAHIR TIDAK BOLEH KOSONG!');
+end else
+if dtpSiswa.Text ='' then
+begin
+ShowMessage('TANGGAL LAHIR TIDAK BOLEH KOSONG!');
+end else
+if cbbJKSiwa.Text ='' then
+begin
+ShowMessage('JENIS KELAMIN TIDAK BOLEH KOSONG!');
+end else
+if cbbJurusan.Text ='' then
+begin
+ShowMessage('JURUSAN TIDAK BOLEH KOSONG!');
+end else
+if edtEWK.Text ='' then
+begin
+ShowMessage('ID WAKIL KELAS TIDAK BOLEH KOSONG!');
+end else
+if edtEalamat.Text ='' then
+begin
+ShowMessage('ALAMAT TIDAK BOLEH KOSONG!');
+end else
+if edtEHP.Text ='' then
+begin
+ShowMessage('NOMOR HP TIDAK BOLEH KOSONG!');
+end else
+if edtEsiswaOT.Text ='' then
+begin
+ShowMessage('ID ORANG TUA TIDAK BOLEH KOSONG!');
+end else
+if edtEsiswaLaporan.Text ='' then
+begin
+ShowMessage('ID LAPORAN TIDAK BOLEH KOSONG!');
+end else
+if edtEsiswaStatus.Text ='' then
+begin
+ShowMessage('STATUS TIDAK BOLEH KOSONG!');
+end
+else
 begin
  zqrysiswa.SQL.Clear;
  zqrysiswa.SQL.Add('insert into siswa values(null,"'+edtEnis.Text+'","'+edtEnisn.Text+'","'+edtENS.Text+'","'+edtEnik.Text+'","'+edtETL.Text+'","'+formatdatetime('yyyy-mm-dd',dtpSiswa.Date)+'","'+cbbJKSiwa.Text+'","'+cbbJurusan.Text+'","'+edtEWK.Text+'","'+edtEalamat.Text+'","'+edtEHP.Text+'","'+edtEsiswaOT.Text+'","'+edtEsiswaLaporan.Text+'","'+edtEsiswaStatus.Text+'")');
@@ -164,14 +226,15 @@ begin
 
  zqrysiswa.SQL.Clear;
  zqrysiswa.SQL.Add('select * from siswa');
- Open;
+ zqrysiswa.Open;
  ShowMessage('DATA BERHASIL DI SIMPAN');
+ bersihSiswa;
 end;
 
 end;
 procedure TFSiswa.siswacellclick(Column: TColumn);
 begin
-id:= zqrysiswa.Fields[0].AsString; 
+id:= zqrysiswa.Fields[0].AsString;
 edtEnis.Text:= zqrysiswa.Fields[1].AsString;
 edtEnisn.Text:= zqrysiswa.Fields[2].AsString;
 edtENS.Text:= zqrysiswa.Fields[3].AsString;
@@ -204,6 +267,40 @@ end else
 begin
 ShowMessage('DATA BATAL DIHAPUS');
 posisiawalSiswa;
+end;
+
+end;
+procedure TFSiswa.editSiswaClick(Sender: TObject);
+begin
+if (edtEnis.Text= '')or (edtEnisn.Text ='')or(edtENS.Text= '')or (edtEnik.Text ='')or (edtETL.Text ='')or(dtpSiswa.Text ='')or(cbbJKSiwa.Text ='')or (cbbJurusan.Text ='')or (edtEWK.Text ='')or (edtEalamat.Text ='')or (edtEHP.Text ='')or (edtEsiswaOT.Text ='')or(edtEsiswaLaporan.Text ='')or (edtEsiswaStatus.Text ='') then
+begin
+ShowMessage('INPUTAN WAJIB DIISI!');
+end else
+if (edtEnis.Text = zqrysiswa.Fields[1].AsString)or (edtEnisn.Text =zqrysiswa.Fields[2].AsString)or(edtENS.Text= zqrysiswa.Fields[3].AsString)or(edtEnik.Text =zqrysiswa.Fields[4].AsString)or (edtETL.Text =zqrysiswa.Fields[5].AsString)or(dtpSiswa.Text =zqrysiswa.Fields[6].AsString)or (cbbJKSiwa.Text =zqrysiswa.Fields[7].AsString)or(cbbJurusan.Text =zqrysiswa.Fields[8].AsString)or(edtEWK.Text =zqrysiswa.Fields[9].AsString)or(edtEalamat.Text =zqrysiswa.Fields[10].AsString)or (edtEHP.Text =zqrysiswa.Fields[11].AsString)or (edtEsiswaOT.Text =zqrysiswa.Fields[12].AsString)or(edtEsiswaLaporan.Text =zqrysiswa.Fields[13].AsString)or (edtEsiswaStatus.Text =zqrysiswa.Fields[14].AsString) then
+begin
+ShowMessage('DATA TIDAK ADA PERUBAHAN');
+posisiawalSiswa;
+end else
+begin
+ShowMessage('DATA BERHASIL DIUPDATE!'); //UPDATE
+zqrysiswa.SQL.Clear;
+zqrysiswa.SQL.Add('Update siswa set nis= "'+edtEnis.Text+'",nisn="'+edtEnisn.Text+'",nama_siswa="'+edtENS.Text+'",nik="'+edtEnik.Text+'",tempat_lahir="'+edtETL.Text+'",tanggal_lahir="'+formatdatetime('yyyy-mm-dd',dtpSiswa.Date)+'",jenis_kelamin="'+cbbJKSiwa.Text+'",jurusan="'+cbbJurusan.Text+'",wali_id="'+edtEWK.Text+'",alamat="'+edtEalamat.Text+'",hp="'+edtEHP.Text+'",orang_tua_id="'+edtEsiswaOT.Text+'",laporan_id="'+edtEsiswaLaporan.Text+'",status="'+edtEsiswaStatus.Text+'"where id="'+id+'"');
+zqrysiswa.ExecSQL;
+zqrysiswa.SQL.Clear;
+zqrysiswa.SQL.Add('select * from siswa');
+zqrysiswa.Open;
+posisiawalSiswa;
+
+end;
+end;
+procedure TFSiswa.VRSiswaClick(Sender: TObject);
+begin
+rprtsiswa.ShowReport();
+end;
+
+procedure TFSiswa.barusiswaClick(Sender: TObject);
+begin
+ bersihSiswa;
 end;
 
 end.

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ADODB, Grids, DBGrids, ExtCtrls, TeeProcs, TeEngine, Chart,
   DbChart, StdCtrls, ComCtrls, ZAbstractConnection, ZConnection,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, frxClass, frxDBSet;
 
 type
   Tlaporan = class(TForm)
@@ -38,6 +38,10 @@ type
     btnLDLaporan: TButton;
     zqrylaporan: TZQuery;
     Zconlaporan: TZConnection;
+    editLaporan: TButton;
+    frxdblaporan: TfrxDBDataset;
+    frxlaporan: TfrxReport;
+    barulaporan: TButton;
     procedure btnLDLaporanClick(Sender: TObject);
     procedure VprestasiClick(Sender: TObject);
     procedure VPelanggaranClick(Sender: TObject);
@@ -47,6 +51,8 @@ type
     procedure posisiawalLaporan;
     procedure laporanonclick(Column: TColumn);
     procedure HLaporanClick(Sender: TObject);
+    procedure editLaporanClick(Sender: TObject);
+    procedure VRLaporanClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -120,11 +126,43 @@ pelanggaran.Show;
 end;
 
 procedure Tlaporan.TLaporanClick(Sender: TObject);
-
-
 begin
-
-with laporan.zqrylaporan do
+if dtpLaporan.Text ='' then
+begin
+ShowMessage('TANGGAL TIDAK BOLEH KOSONG!');
+end else
+if cbbSemester.Text ='' then
+begin
+ShowMessage('SEMESTER TIDAK BOLEH KOSONG!');
+end else
+if edtSiswaId.Text ='' then
+begin
+ShowMessage('ID SISWA TIDAK BOLEH KOSONG!');
+end else
+if edtWK.Text ='' then
+begin
+ShowMessage('ID WALI KELAS TIDAK BOLEH KOSONG!');
+end else
+if edtOT.Text ='' then
+begin
+ShowMessage('ID ORANG TIDAK BOLEH KOSONG!');
+end else
+if edtPrestasi.Text ='' then
+begin
+ShowMessage('ID PRESTASI TIDAK BOLEH KOSONG!');
+end else
+if edtPelanggaran.Text ='' then
+begin
+ShowMessage('ID PELANGGARAN TIDAK BOLEH KOSONG!');
+end else
+if edtKeterangan.Text ='' then
+begin
+ShowMessage('KETERANGAN TIDAK BOLEH KOSONG!');
+end else
+if edtStatus.Text ='' then
+begin
+ShowMessage('STATUS TIDAK BOLEH KOSONG!');
+end else
 begin
  zqrylaporan.SQL.Clear;
  zqrylaporan.SQL.Add('insert into laporan values(null,"'+formatdatetime('yyyy-mm-dd',dtpLaporan.date)+'","'+cbbSemester.Text+'","'+edtSiswaId.Text+'","'+edtWK.Text+'","'+edtOT.Text+'","'+edtPrestasi.Text+'","'+edtPelanggaran.Text+'","'+edtKeterangan.Text+'","'+edtStatus.Text+'")');
@@ -132,8 +170,9 @@ begin
 
  zqrylaporan.SQL.Clear;
  zqrylaporan.SQL.Add('select * from laporan');
- Open;
+ zqrylaporan.Open;
  ShowMessage('DATA BERHASIL DI SIMPAN');
+ bersihLaporan;
 end;
 
 end;
@@ -169,6 +208,33 @@ begin
 ShowMessage('DATA BATAL DIHAPUS');
 posisiawalLaporan;
 end;
+end;
+
+procedure Tlaporan.editLaporanClick(Sender: TObject);
+begin
+if (dtpLaporan.Text= '')or (cbbSemester.Text ='')or(edtSiswaId.Text= '')or (edtWK.Text ='')or (edtOT.Text ='')or (edtPrestasi.Text ='')or (edtPelanggaran.Text ='')or (edtKeterangan.Text ='')or (edtstatus.Text ='') then
+begin
+ShowMessage('INPUTAN WAJIB DIISI!');
+end else
+if (dtpLaporan.Text = zqrylaporan.Fields[1].AsString)or (cbbSemester.Text =zqrylaporan.Fields[2].AsString)or(edtSiswaId.Text= zqrylaporan.Fields[3].AsString)or (edtWK.Text =zqrylaporan.Fields[4].AsString)or (edtOT.Text =zqrylaporan.Fields[5].AsString)or (edtPrestasi.Text =zqrylaporan.Fields[6].AsString)or (edtPelanggaran.Text =zqrylaporan.Fields[7].AsString)or (edtKeterangan.Text =zqrylaporan.Fields[8].AsString)or (edtstatus.Text =zqrylaporan.Fields[9].AsString) then
+begin
+ShowMessage('DATA TIDAK ADA PERUBAHAN');
+posisiawalLaporan;
+end else
+begin
+ShowMessage('DATA BERHASIL DIUPDATE!');
+zqrylaporan.SQL.Add('Update laporan set tanggal="'+formatdatetime('yyyy-mm-dd',dtpLaporan.Date)+'" ,semester="'+cbbSemester.Text+'",siswa_id="'+edtSiswaId.Text+'",wali_id="'+edtWK.Text+'",orang_tua_id="'+edtOT.Text+'",prestasi_id="'+edtPrestasi.Text+'",pelanggaran_id= "'+edtPelanggaran.Text+'",keterangan="'+edtKeterangan.Text+'",status="'+edtStatus.Text+'"where id="'+id+'"');
+zqrylaporan.ExecSQL;
+zqrylaporan.SQL.Clear;
+zqrylaporan.SQL.Add('select * from laporan');
+zqrylaporan.Open;
+posisiawalLaporan;
+end;
+end;
+
+procedure Tlaporan.VRLaporanClick(Sender: TObject);
+begin
+frxlaporan.ShowReport();
 end;
 
 end.

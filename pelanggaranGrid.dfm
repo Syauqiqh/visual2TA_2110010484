@@ -80,7 +80,6 @@ object pelanggaran: Tpelanggaran
     Height = 21
     ItemHeight = 13
     TabOrder = 4
-    Text = 'pilih jenis'
     Items.Strings = (
       'Berat'
       'Sedang'
@@ -104,9 +103,18 @@ object pelanggaran: Tpelanggaran
     TabOrder = 6
     OnClick = btnLDLaporanClick
   end
+  object editpelanggaran: TButton
+    Left = 376
+    Top = 64
+    Width = 97
+    Height = 33
+    Caption = 'Edit'
+    TabOrder = 7
+    OnClick = editpelanggaranClick
+  end
   object dsPelanggaran: TDataSource
     DataSet = zqrypelanggaran
-    Left = 328
+    Left = 280
     Top = 104
   end
   object Zconpelanggaran: TZConnection
@@ -120,8 +128,8 @@ object pelanggaran: Tpelanggaran
     User = 'root'
     Protocol = 'mysql'
     LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
-    Left = 376
-    Top = 96
+    Left = 336
+    Top = 104
   end
   object zqrypelanggaran: TZQuery
     Connection = Zconpelanggaran
@@ -129,7 +137,7 @@ object pelanggaran: Tpelanggaran
     SQL.Strings = (
       'select * from pelanggaran')
     Params = <>
-    Left = 448
-    Top = 88
+    Left = 232
+    Top = 104
   end
 end

@@ -23,12 +23,14 @@ type
     btnLDLaporan: TButton;
     Zconpelanggaran: TZConnection;
     zqrypelanggaran: TZQuery;
+    editpelanggaran: TButton;
     procedure btnLDLaporanClick(Sender: TObject);
     procedure btnTPelanggaranClick(Sender: TObject);
     procedure bersihpelanggaran;
     procedure posisiawalpelanggaran;
     procedure pealnggaranonCllick(Column: TColumn);
     procedure HPelanggaranClick(Sender: TObject);
+    procedure editpelanggaranClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,8 +75,18 @@ end;
 
 procedure Tpelanggaran.btnTPelanggaranClick(Sender: TObject);
 begin
-
-with pelanggaran.zqrypelanggaran do
+if edtpoin.Text ='' then
+begin
+ShowMessage('POIN TIDAK BOLEH KOSONG!');
+end else
+if cbbJenis.Text ='' then
+begin
+ShowMessage('JENIS PRESTASI TIDAK BOLEH KOSONG!');
+end else
+if dtpPelanggaraN.Text ='' then
+begin
+ShowMessage('TANGGAL TIDAK BOLEH KOSONG!');
+end else
 begin
  zqrypelanggaran.SQL.Clear;
  zqrypelanggaran.SQL.Add('insert into pelanggaran values(null,"'+edtpoin.Text+'","'+cbbJenis.Text+'","'+formatdatetime('yyyy-mm-dd',dtpPelanggaran.Date)+'")');
@@ -82,7 +94,7 @@ begin
 
  zqrypelanggaran.SQL.Clear;
  zqrypelanggaran.SQL.Add('select * from pelanggaran');
- Open;
+ zqrypelanggaran.Open;
  ShowMessage('DATA BERHASIL DI SIMPAN');
 
 end;
@@ -112,6 +124,28 @@ posisiawalpelanggaran;
 end else
 begin
 ShowMessage('DATA BATAL DIHAPUS');
+posisiawalpelanggaran;
+end;
+end;
+
+procedure Tpelanggaran.editpelanggaranClick(Sender: TObject);
+begin
+if (edtpoin.Text= '')or (cbbJenis.Text ='')or(dtpPelanggaran.Text= '')then
+begin
+ShowMessage('INPUTAN WAJIB DIISI!');
+end else
+if (edtpoin.Text = zqrypelanggaran.Fields[1].AsString)or(cbbJenis.Text =zqrypelanggaran.Fields[2].AsString)or(dtpPelanggaran.Text= zqrypelanggaran.Fields[3].AsString)then
+begin
+ShowMessage('DATA TIDAK ADA PERUBAHAN');
+posisiawalpelanggaran;
+end else
+begin
+ShowMessage('DATA BERHASIL DIUPDATE!');
+zqrypelanggaran.SQL.Add('Update pelanggaran set poin= "'+edtpoin.Text+'",jenis="'+cbbJenis.Text+'",tanggal="'+formatdatetime('yyyy-mm-dd',dtpPelanggaran.Date)+'");
+zqrypelanggaran.ExecSQL;
+zqrypelanggaran.SQL.Clear;
+zqrypelanggaran.SQL.Add('select * from pelanggaran');
+zqrypelanggaran.Open;
 posisiawalpelanggaran;
 end;
 end;
