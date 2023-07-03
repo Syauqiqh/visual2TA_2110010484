@@ -46,13 +46,14 @@ type
     procedure VprestasiClick(Sender: TObject);
     procedure VPelanggaranClick(Sender: TObject);
     procedure TLaporanClick(Sender: TObject);
-    procedure laporancallclick(Column: TColumn);
     procedure bersihLaporan;
     procedure posisiawalLaporan;
     procedure laporanonclick(Column: TColumn);
     procedure HLaporanClick(Sender: TObject);
     procedure editLaporanClick(Sender: TObject);
     procedure VRLaporanClick(Sender: TObject);
+    procedure barulaporanClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -61,6 +62,7 @@ type
 
 var
   laporan: Tlaporan;
+  id : string;
 
 implementation
 
@@ -87,7 +89,6 @@ begin
 end;
 procedure Tlaporan.bersihLaporan;
 begin
-dtpLaporan.Clear;
 cbbSemester.Clear;
 edtSiswaId.Clear;
 edtWK.Clear;
@@ -101,23 +102,24 @@ end;
 procedure Tlaporan.posisiawalLaporan;
 begin
 bersihLaporan;
-dtpLaporan.Enabled:= True;
-cbbSemester.Enabled:= True;
-edtSiswaId.Enabled:= True;
-edtWK.Enabled:= True;
-edtOT.Enabled:= True;
-edtPrestasi.Enabled:= True;
-edtPelanggaran.Enabled:= True;
-edtKeterangan.Enabled:= True;
-edtStatus.Enabled:= True;
-TLaporan.Enabled:= True;
+dtpLaporan.Enabled:= False;
+cbbSemester.Enabled:= False;
+edtSiswaId.Enabled:= False;
+edtWK.Enabled:= False;
+edtOT.Enabled:= False;
+edtPrestasi.Enabled:= False;
+edtPelanggaran.Enabled:= False;
+edtKeterangan.Enabled:= False;
+edtStatus.Enabled:= False;
+TLaporan.Enabled:= False;
 HLaporan.Enabled:= False;
-btnLDLapora.nabled:= True;
+btnLDLaporan.Enabled:= True;
+barulaporan.Enabled:= True;
 end;
 
 procedure Tlaporan.VprestasiClick(Sender: TObject);
 begin
-prestasi.show;
+Fprestasi.show;
 end;
 
 procedure Tlaporan.VPelanggaranClick(Sender: TObject);
@@ -127,10 +129,6 @@ end;
 
 procedure Tlaporan.TLaporanClick(Sender: TObject);
 begin
-if dtpLaporan.Text ='' then
-begin
-ShowMessage('TANGGAL TIDAK BOLEH KOSONG!');
-end else
 if cbbSemester.Text ='' then
 begin
 ShowMessage('SEMESTER TIDAK BOLEH KOSONG!');
@@ -180,7 +178,6 @@ end;
 procedure Tlaporan.laporanonclick(Column: TColumn);
 begin
 id:= zqrylaporan.Fields[0].AsString;
-dtpLaporan.Text:= zqrylaporan.Fields[1].AsString;
 cbbSemester.Text:= zqrylaporan.Fields[2].AsString;
 edtSiswaId.Text:= zqrylaporan.Fields[3].AsString;
 edtWK.Text:= zqrylaporan.Fields[4].AsString;
@@ -212,11 +209,11 @@ end;
 
 procedure Tlaporan.editLaporanClick(Sender: TObject);
 begin
-if (dtpLaporan.Text= '')or (cbbSemester.Text ='')or(edtSiswaId.Text= '')or (edtWK.Text ='')or (edtOT.Text ='')or (edtPrestasi.Text ='')or (edtPelanggaran.Text ='')or (edtKeterangan.Text ='')or (edtstatus.Text ='') then
+if  (cbbSemester.Text ='')or(edtSiswaId.Text= '')or (edtWK.Text ='')or (edtOT.Text ='')or (edtPrestasi.Text ='')or (edtPelanggaran.Text ='')or (edtKeterangan.Text ='')or (edtstatus.Text ='') then
 begin
 ShowMessage('INPUTAN WAJIB DIISI!');
 end else
-if (dtpLaporan.Text = zqrylaporan.Fields[1].AsString)or (cbbSemester.Text =zqrylaporan.Fields[2].AsString)or(edtSiswaId.Text= zqrylaporan.Fields[3].AsString)or (edtWK.Text =zqrylaporan.Fields[4].AsString)or (edtOT.Text =zqrylaporan.Fields[5].AsString)or (edtPrestasi.Text =zqrylaporan.Fields[6].AsString)or (edtPelanggaran.Text =zqrylaporan.Fields[7].AsString)or (edtKeterangan.Text =zqrylaporan.Fields[8].AsString)or (edtstatus.Text =zqrylaporan.Fields[9].AsString) then
+if  (cbbSemester.Text =zqrylaporan.Fields[2].AsString)or(edtSiswaId.Text= zqrylaporan.Fields[3].AsString)or (edtWK.Text =zqrylaporan.Fields[4].AsString)or (edtOT.Text =zqrylaporan.Fields[5].AsString)or (edtPrestasi.Text =zqrylaporan.Fields[6].AsString)or (edtPelanggaran.Text =zqrylaporan.Fields[7].AsString)or (edtKeterangan.Text =zqrylaporan.Fields[8].AsString)or (edtstatus.Text =zqrylaporan.Fields[9].AsString) then
 begin
 ShowMessage('DATA TIDAK ADA PERUBAHAN');
 posisiawalLaporan;
@@ -235,6 +232,29 @@ end;
 procedure Tlaporan.VRLaporanClick(Sender: TObject);
 begin
 frxlaporan.ShowReport();
+end;
+
+procedure Tlaporan.barulaporanClick(Sender: TObject);
+begin
+bersihLaporan;
+dtpLaporan.Enabled:= True;
+cbbSemester.Enabled:= True;
+edtSiswaId.Enabled:= True;
+edtWK.Enabled:= True;
+edtOT.Enabled:= True;
+edtPrestasi.Enabled:= True;
+edtPelanggaran.Enabled:= True;
+edtKeterangan.Enabled:= True;
+edtStatus.Enabled:= True;
+TLaporan.Enabled:= True;
+HLaporan.Enabled:= True;
+btnLDLaporan.Enabled:= True;
+barulaporan.Enabled:= False;
+end;
+
+procedure Tlaporan.FormCreate(Sender: TObject);
+begin
+posisiawalLaporan;
 end;
 
 end.

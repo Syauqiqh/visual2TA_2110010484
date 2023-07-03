@@ -11,6 +11,7 @@ object orang_tua: Torang_tua
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbl3: TLabel
@@ -158,7 +159,7 @@ object orang_tua: Torang_tua
     ItemHeight = 13
     TabOrder = 9
     Items.Strings = (
-      'Laki_laki'
+      'pria'
       'Perempuan')
   end
   object edtStatus: TEdit
@@ -193,22 +194,14 @@ object orang_tua: Torang_tua
     TabOrder = 13
     OnClick = editOTClick
   end
-  object btnVROT: TButton
-    Left = 496
-    Top = 136
-    Width = 129
-    Height = 33
-    Caption = 'View Report'
-    TabOrder = 14
-    OnClick = btnVROTClick
-  end
   object baruOT: TButton
     Left = 648
     Top = 136
     Width = 97
     Height = 33
     Caption = 'Baru'
-    TabOrder = 15
+    TabOrder = 14
+    OnClick = baruOTClick
   end
   object dsOT: TDataSource
     DataSet = zqryOT
@@ -236,35 +229,5 @@ object orang_tua: Torang_tua
     LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
     Left = 8
     Top = 128
-  end
-  object frxOT: TfrxReport
-    Version = '4.0.11'
-    DataSet = frxdbOT
-    DataSetName = 'frxdbOT'
-    DotMatrixReport = False
-    IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
-    PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
-    PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45109.858344594900000000
-    ReportOptions.LastChange = 45109.858344594900000000
-    ScriptLanguage = 'PascalScript'
-    ScriptText.Strings = (
-      'begin'
-      ''
-      'end.')
-    Left = 624
-    Top = 176
-    Datasets = <>
-    Variables = <>
-    Style = <>
-  end
-  object frxdbOT: TfrxDBDataset
-    UserName = 'frxdbOT'
-    CloseDataSource = False
-    DataSource = dsOT
-    Left = 672
-    Top = 176
   end
 end

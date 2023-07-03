@@ -24,6 +24,7 @@ type
     Zconpelanggaran: TZConnection;
     zqrypelanggaran: TZQuery;
     editpelanggaran: TButton;
+    barupelanggaran: TButton;
     procedure btnLDLaporanClick(Sender: TObject);
     procedure btnTPelanggaranClick(Sender: TObject);
     procedure bersihpelanggaran;
@@ -31,6 +32,8 @@ type
     procedure pealnggaranonCllick(Column: TColumn);
     procedure HPelanggaranClick(Sender: TObject);
     procedure editpelanggaranClick(Sender: TObject);
+    procedure barupelanggaranClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,6 +42,7 @@ type
 
 var
   pelanggaran: Tpelanggaran;
+  id : string;
 
 implementation
 
@@ -60,17 +64,18 @@ procedure Tpelanggaran.bersihpelanggaran;
 begin
 edtpoin.Clear;
 cbbJenis.Clear;
-dtpPelanggaran.Clear;
+
 end;
 
 procedure Tpelanggaran.posisiawalpelanggaran;
 begin
 bersihpelanggaran;
-edtpoin.Enabled:= True;
-cbbJenis.Enabled:= True;
-dtpPelanggaran.Enabled:= True;
+edtpoin.Enabled:= False;
+cbbJenis.Enabled:= False;
+dtpPelanggaran.Enabled:= False;
 HPelanggaran.Enabled:= False;
-btnTPelanggaran.Enabled:= True;
+btnTPelanggaran.Enabled:= False;
+barupelanggaran.Enabled:= True;
 end;
 
 procedure Tpelanggaran.btnTPelanggaranClick(Sender: TObject);
@@ -82,10 +87,6 @@ end else
 if cbbJenis.Text ='' then
 begin
 ShowMessage('JENIS PRESTASI TIDAK BOLEH KOSONG!');
-end else
-if dtpPelanggaraN.Text ='' then
-begin
-ShowMessage('TANGGAL TIDAK BOLEH KOSONG!');
 end else
 begin
  zqrypelanggaran.SQL.Clear;
@@ -106,7 +107,6 @@ begin
 id:= zqrypelanggaran.Fields[0].AsString;
 edtpoin.Text:= zqrypelanggaran.Fields[1].AsString;
 cbbJenis.Text:= zqrypelanggaran.Fields[2].AsString;
-dtpPelanggaran.Text:= zqrypelanggaran.Fields[3].AsString;
 end;
 
 procedure Tpelanggaran.HPelanggaranClick(Sender: TObject);
@@ -130,24 +130,40 @@ end;
 
 procedure Tpelanggaran.editpelanggaranClick(Sender: TObject);
 begin
-if (edtpoin.Text= '')or (cbbJenis.Text ='')or(dtpPelanggaran.Text= '')then
+if (edtpoin.Text= '')or (cbbJenis.Text ='')then
 begin
 ShowMessage('INPUTAN WAJIB DIISI!');
 end else
-if (edtpoin.Text = zqrypelanggaran.Fields[1].AsString)or(cbbJenis.Text =zqrypelanggaran.Fields[2].AsString)or(dtpPelanggaran.Text= zqrypelanggaran.Fields[3].AsString)then
+if (edtpoin.Text = zqrypelanggaran.Fields[1].AsString)or(cbbJenis.Text =zqrypelanggaran.Fields[2].AsString)then
 begin
 ShowMessage('DATA TIDAK ADA PERUBAHAN');
 posisiawalpelanggaran;
 end else
 begin
 ShowMessage('DATA BERHASIL DIUPDATE!');
-zqrypelanggaran.SQL.Add('Update pelanggaran set poin= "'+edtpoin.Text+'",jenis="'+cbbJenis.Text+'",tanggal="'+formatdatetime('yyyy-mm-dd',dtpPelanggaran.Date)+'");
+zqrypelanggaran.SQL.Add('Update pelanggaran set poin= "'+edtpoin.Text+'",jenis="'+cbbJenis.Text+'",tanggal="'+formatdatetime('yyyy-mm-dd',dtpPelanggaran.Date)+'"');
 zqrypelanggaran.ExecSQL;
 zqrypelanggaran.SQL.Clear;
 zqrypelanggaran.SQL.Add('select * from pelanggaran');
 zqrypelanggaran.Open;
 posisiawalpelanggaran;
 end;
+end;
+
+procedure Tpelanggaran.barupelanggaranClick(Sender: TObject);
+begin
+bersihpelanggaran;
+edtpoin.Enabled:= True;
+cbbJenis.Enabled:= True;
+dtpPelanggaran.Enabled:= True;
+HPelanggaran.Enabled:= True;
+btnTPelanggaran.Enabled:= True;
+barupelanggaran.Enabled:= False;
+end;
+
+procedure Tpelanggaran.FormCreate(Sender: TObject);
+begin
+posisiawalpelanggaran;
 end;
 
 end.

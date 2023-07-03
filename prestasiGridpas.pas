@@ -24,11 +24,16 @@ type
     Zconprestasi: TZConnection;
     zqryprestasi: TZQuery;
     editprestasi: TButton;
+    baruprestasi: TButton;
     procedure btnLDPrestasiClick(Sender: TObject);
     procedure btnTPrestasiClick(Sender: TObject);
     procedure HPrestasiClick(Sender: TObject);
     procedure prestasionclick(Column: TColumn);
     procedure editprestasiClick(Sender: TObject);
+    procedure bersihprestasi;
+    procedure posisiawalprestasi;
+    procedure baruprestasiClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,6 +42,7 @@ type
 
 var
   Fprestasi: TFprestasi;
+  id:string;
 
 implementation
 
@@ -57,20 +63,20 @@ procedure TFprestasi.bersihprestasi;
 begin
 edtpoin.Clear;
 cbbJenis.Clear;
-dtpPrestasi.Clear;
 end;
 
 procedure TFprestasi.posisiawalprestasi;
 begin
-bersihprastasi;
-edtpoin.Enabled:= True;
-cbbJenis.Enabled:= True;
-dtpPrestasi.Enabled:= True;
+bersihprestasi;
+edtpoin.Enabled:= False;
+cbbJenis.Enabled:= False;
+dtpPrestasi.Enabled:= False;
 HPrestasi.Enabled:= False;
-btnTPrestasi.Enabled:= True;
+btnTPrestasi.Enabled:= False;
+baruprestasi.Enabled:= True;
 end;
 
-procedure TFprestasi.TPrestasiClick(Sender: TObject);
+procedure TFprestasi.btnTPrestasiClick(Sender: TObject);
 
 begin
 if edtpoin.Text ='' then
@@ -81,21 +87,17 @@ if cbbJenis.Text ='' then
 begin
 ShowMessage('JENIS PRESTASI TIDAK BOLEH KOSONG!');
 end else
-if dtpPrestasi.Text ='' then
-begin
-ShowMessage('TANGGAL TIDAK BOLEH KOSONG!');
-end else
 begin
  zqryprestasi.SQL.Clear;
  zqryprestasi.SQL.Add('insert into prestasi values(null,"'+edtpoin.Text+'","'+cbbJenis.Text+'","'+formatdatetime('yyyy-mm-dd',dtpPrestasi.Date)+'")');
- ExecSQL;
+ zqryprestasi.ExecSQL;
 
  zqryprestasi.SQL.Clear;
  zqryprestasi.SQL.Add('select * from prestasi');
  zqryprestasi.Open;
  bersihprestasi;
 end;
-   end;
+end;
 procedure TFprestasi.HPrestasiClick(Sender: TObject);
 begin
 if MessageDlg('APAKAH YAKIN MENGHAPUS DATA INI?',mtWarning,[mbYes,mbNo],0)= mryes then
@@ -120,29 +122,44 @@ begin
 id:= zqryprestasi.Fields[0].AsString;
 edtpoin.Text:= zqryprestasi.Fields[1].AsString;
 cbbJenis.Text:= zqryprestasi.Fields[2].AsString;
-dtpPrestasi.Text:= zqryprestasi.Fields[3].AsString;
 end;
 
 procedure TFprestasi.editprestasiClick(Sender: TObject);
 begin
-if (edtpoin.Text= '')or (cbbJenis.Text ='')or(dtpPrestasi.Text= '')then
+if (edtpoin.Text= '')or (cbbJenis.Text ='')then
 begin
 ShowMessage('INPUTAN WAJIB DIISI!');
 end else
-if (edtpoin.Text = zqryprestasi.Fields[1].AsString)or(cbbJenis.Text =zqryprestasi.Fields[2].AsString)or(dtpPrestasi.Text= zqryprestasi.Fields[3].AsString)then
+if (edtpoin.Text = zqryprestasi.Fields[1].AsString)or(cbbJenis.Text =zqryprestasi.Fields[2].AsString)then
 begin
 ShowMessage('DATA TIDAK ADA PERUBAHAN');
 posisiawalprestasi;
 end else
 begin
 ShowMessage('DATA BERHASIL DIUPDATE!');
-zqryprestasi.SQL.Add('Update prestasi set poin= "'+edtpoin.Text+'",jenis="'+cbbJenis.Text+'",tanggal="'+formatdatetime('yyyy-mm-dd',dtpPrestasi.Date)+'");
+zqryprestasi.SQL.Add('Update prestasi set poin= "'+edtpoin.Text+'",jenis="'+cbbJenis.Text+'",tanggal="'+formatdatetime('yyyy-mm-dd',dtpPrestasi.Date)+'"');
 zqryprestasi.ExecSQL;
 zqryprestasi.SQL.Clear;
 zqryprestasi.SQL.Add('select * from prestasi');
 zqryprestasi.Open;
 posisiawalprestasi;
 end;
+end;
+
+procedure TFprestasi.baruprestasiClick(Sender: TObject);
+begin
+bersihprestasi;
+edtpoin.Enabled:= True;
+cbbJenis.Enabled:= True;
+dtpPrestasi.Enabled:= True;
+HPrestasi.Enabled:= True;
+btnTPrestasi.Enabled:= True;
+baruprestasi.Enabled:= False;
+end;
+
+procedure TFprestasi.FormCreate(Sender: TObject);
+begin
+posisiawalprestasi;
 end;
 
 end.

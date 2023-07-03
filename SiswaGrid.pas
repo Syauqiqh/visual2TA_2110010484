@@ -14,7 +14,6 @@ type
     dbgridSiswa: TDBGrid;
     tambahSiswa: TButton;
     LDSiswa: TButton;
-    VRSiswa: TButton;
     VOT: TButton;
     VWK: TButton;
     HSiswa: TButton;
@@ -49,23 +48,18 @@ type
     zqrysiswa: TZQuery;
     Zconsiswa: TZConnection;
     editSiswa: TButton;
-    frxdbsiswa: TfrxDBDataset;
-    rprtsiswa: TfrxReport;
     barusiswa: TButton;
     procedure LDSiswaClick(Sender: TObject);
-    procedure VWKClick(Sender: TObject);
-    procedure VOTClick(Sender: TObject);
     procedure tambahSiswaClick(Sender: TObject);
-    procedure siswacellclick(Column: TColumn);
-    procedure siswacellclick(Column: TColumn);
-    procedure siswaclick(Column: TColumn);
-    procedure siswaoncellclick(Column: TColumn);
+    procedure gridsiswacellclick(Column: TColumn);
     procedure bersihSiswa;
     procedure posisiawalSiswa;
     procedure HSiswaClick(Sender: TObject);
     procedure editSiswaClick(Sender: TObject);
-    procedure VRSiswaClick(Sender: TObject);
     procedure barusiswaClick(Sender: TObject);
+    procedure VWKClick(Sender: TObject);
+    procedure VOTClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -74,10 +68,9 @@ type
 
 var
   FSiswa: TFSiswa;
-
+  id : string;
 implementation
-
-uses WLGrid,OTGrid;
+ uses WLGrid,OTGrid;
 
 {$R *.dfm}
 
@@ -112,7 +105,6 @@ edtEnisn.Clear;
 edtENS.Clear;
 edtEnik.Clear;
 edtETL.Clear;
-dtpSiswa.Clear;
 cbbJKSiwa.Clear;
 cbbJurusan.Clear;
 edtEWK.Clear;
@@ -126,38 +118,28 @@ end;
 procedure TFSiswa.posisiawalSiswa;
 begin
 bersihSiswa;
-VRSiswa.Enabled:= True;
-tambahSiswa.Enabled:= True;
+tambahSiswa.Enabled:= False;
 VWK.Enabled:= True;
 LDSiswa.Enabled:= True;
 VOT.Enabled:= True;
 HSiswa.Enabled:= False;
-edtEnis.Enabled:= True;
-edtEnisn.Enabled:= True;
-edtENS.Enabled:= True;
-edtEnik.Enabled:= True;
-edtETL.Enabled:= True;
-dtpSiswa.Enabled:= True;
-cbbJKSiwa.Enabled:= True;
-cbbJurusan.Enabled:= True;
-edtEWK.Enabled:= True;
-edtEalamat.Enabled:= True;
-edtEHP.Enabled:= True;
-edtEsiswaOT.Enabled:= True;
-edtEsiswaLaporan.Enabled:= True;
-edtEsiswaStatus.Enabled:= True;
+edtEnis.Enabled:= False;
+edtEnisn.Enabled:= False;
+edtENS.Enabled:= False;
+edtEnik.Enabled:= False;
+edtETL.Enabled:= False;
+dtpSiswa.Enabled:= False;
+cbbJKSiwa.Enabled:= False;
+cbbJurusan.Enabled:= False;
+edtEWK.Enabled:= False;
+edtEalamat.Enabled:= False;
+edtEHP.Enabled:= False;
+edtEsiswaOT.Enabled:= False;
+edtEsiswaLaporan.Enabled:= False;
+edtEsiswaStatus.Enabled:= False;
+barusiswa.Enabled:= true;
 end;
 
-
-procedure TFSiswa.VWKClick(Sender: TObject);
-begin
-wali_kelas.Show;
-end;
-
-procedure TFSiswa.VOTClick(Sender: TObject);
-begin
-  orang_tua.Show;
-end;
 
 procedure TFSiswa.tambahSiswaClick(Sender: TObject);
 
@@ -181,10 +163,6 @@ end else
 if edtETL.Text ='' then
 begin
 ShowMessage('TEMPAT LAHIR TIDAK BOLEH KOSONG!');
-end else
-if dtpSiswa.Text ='' then
-begin
-ShowMessage('TANGGAL LAHIR TIDAK BOLEH KOSONG!');
 end else
 if cbbJKSiwa.Text ='' then
 begin
@@ -232,7 +210,8 @@ begin
 end;
 
 end;
-procedure TFSiswa.siswacellclick(Column: TColumn);
+
+procedure TFSiswa.gridsiswacellclick(Column: TColumn);
 begin
 id:= zqrysiswa.Fields[0].AsString;
 edtEnis.Text:= zqrysiswa.Fields[1].AsString;
@@ -240,7 +219,6 @@ edtEnisn.Text:= zqrysiswa.Fields[2].AsString;
 edtENS.Text:= zqrysiswa.Fields[3].AsString;
 edtEnik.Text:= zqrysiswa.Fields[4].AsString;
 edtETL.Text:= zqrysiswa.Fields[5].AsString;
-dtpSiswa.Text:= zqrysiswa.Fields[6].AsString;
 cbbJKSiwa.Text:= zqrysiswa.Fields[7].AsString;
 cbbJurusan.Text:= zqrysiswa.Fields[8].AsString;
 edtEWK.Text:= zqrysiswa.Fields[9].AsString;
@@ -272,11 +250,11 @@ end;
 end;
 procedure TFSiswa.editSiswaClick(Sender: TObject);
 begin
-if (edtEnis.Text= '')or (edtEnisn.Text ='')or(edtENS.Text= '')or (edtEnik.Text ='')or (edtETL.Text ='')or(dtpSiswa.Text ='')or(cbbJKSiwa.Text ='')or (cbbJurusan.Text ='')or (edtEWK.Text ='')or (edtEalamat.Text ='')or (edtEHP.Text ='')or (edtEsiswaOT.Text ='')or(edtEsiswaLaporan.Text ='')or (edtEsiswaStatus.Text ='') then
+if (edtEnis.Text= '')or (edtEnisn.Text ='')or(edtENS.Text= '')or (edtEnik.Text ='')or (edtETL.Text ='')or(cbbJKSiwa.Text ='')or (cbbJurusan.Text ='')or (edtEWK.Text ='')or (edtEalamat.Text ='')or (edtEHP.Text ='')or (edtEsiswaOT.Text ='')or(edtEsiswaLaporan.Text ='')or (edtEsiswaStatus.Text ='') then
 begin
 ShowMessage('INPUTAN WAJIB DIISI!');
 end else
-if (edtEnis.Text = zqrysiswa.Fields[1].AsString)or (edtEnisn.Text =zqrysiswa.Fields[2].AsString)or(edtENS.Text= zqrysiswa.Fields[3].AsString)or(edtEnik.Text =zqrysiswa.Fields[4].AsString)or (edtETL.Text =zqrysiswa.Fields[5].AsString)or(dtpSiswa.Text =zqrysiswa.Fields[6].AsString)or (cbbJKSiwa.Text =zqrysiswa.Fields[7].AsString)or(cbbJurusan.Text =zqrysiswa.Fields[8].AsString)or(edtEWK.Text =zqrysiswa.Fields[9].AsString)or(edtEalamat.Text =zqrysiswa.Fields[10].AsString)or (edtEHP.Text =zqrysiswa.Fields[11].AsString)or (edtEsiswaOT.Text =zqrysiswa.Fields[12].AsString)or(edtEsiswaLaporan.Text =zqrysiswa.Fields[13].AsString)or (edtEsiswaStatus.Text =zqrysiswa.Fields[14].AsString) then
+if (edtEnis.Text = zqrysiswa.Fields[1].AsString)or (edtEnisn.Text =zqrysiswa.Fields[2].AsString)or(edtENS.Text= zqrysiswa.Fields[3].AsString)or(edtEnik.Text =zqrysiswa.Fields[4].AsString)or (edtETL.Text =zqrysiswa.Fields[5].AsString)or (cbbJKSiwa.Text =zqrysiswa.Fields[7].AsString)or(cbbJurusan.Text =zqrysiswa.Fields[8].AsString)or(edtEWK.Text =zqrysiswa.Fields[9].AsString)or(edtEalamat.Text =zqrysiswa.Fields[10].AsString)or (edtEHP.Text =zqrysiswa.Fields[11].AsString)or (edtEsiswaOT.Text =zqrysiswa.Fields[12].AsString)or(edtEsiswaLaporan.Text =zqrysiswa.Fields[13].AsString)or (edtEsiswaStatus.Text =zqrysiswa.Fields[14].AsString) then
 begin
 ShowMessage('DATA TIDAK ADA PERUBAHAN');
 posisiawalSiswa;
@@ -293,14 +271,45 @@ posisiawalSiswa;
 
 end;
 end;
-procedure TFSiswa.VRSiswaClick(Sender: TObject);
-begin
-rprtsiswa.ShowReport();
-end;
 
 procedure TFSiswa.barusiswaClick(Sender: TObject);
 begin
  bersihSiswa;
+ tambahSiswa.Enabled:= True;
+VWK.Enabled:= True;
+LDSiswa.Enabled:= True;
+VOT.Enabled:= True;
+HSiswa.Enabled:= True;
+edtEnis.Enabled:= True;
+edtEnisn.Enabled:= True;
+edtENS.Enabled:= True;
+edtEnik.Enabled:= True;
+edtETL.Enabled:= True;
+dtpSiswa.Enabled:= True;
+cbbJKSiwa.Enabled:= True;
+cbbJurusan.Enabled:= True;
+edtEWK.Enabled:= True;
+edtEalamat.Enabled:= True;
+edtEHP.Enabled:= True;
+edtEsiswaOT.Enabled:= True;
+edtEsiswaLaporan.Enabled:= True;
+edtEsiswaStatus.Enabled:= True;
+barusiswa.Enabled:= false;
+end;
+
+procedure TFSiswa.VWKClick(Sender: TObject);
+begin
+wali_kelas.Show;
+end;
+
+procedure TFSiswa.VOTClick(Sender: TObject);
+begin
+orang_tua.show;
+end;
+
+procedure TFSiswa.FormCreate(Sender: TObject);
+begin
+posisiawalSiswa;
 end;
 
 end.

@@ -11,6 +11,7 @@ object pelanggaran: Tpelanggaran
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -36,7 +37,7 @@ object pelanggaran: Tpelanggaran
   end
   object dbgrdPelanggaran: TDBGrid
     Left = 8
-    Top = 136
+    Top = 152
     Width = 481
     Height = 169
     DataSource = dsPelanggaran
@@ -112,9 +113,18 @@ object pelanggaran: Tpelanggaran
     TabOrder = 7
     OnClick = editpelanggaranClick
   end
+  object barupelanggaran: TButton
+    Left = 248
+    Top = 104
+    Width = 113
+    Height = 33
+    Caption = 'Baru'
+    TabOrder = 8
+    OnClick = barupelanggaranClick
+  end
   object dsPelanggaran: TDataSource
     DataSet = zqrypelanggaran
-    Left = 280
+    Left = 112
     Top = 104
   end
   object Zconpelanggaran: TZConnection
@@ -128,7 +138,7 @@ object pelanggaran: Tpelanggaran
     User = 'root'
     Protocol = 'mysql'
     LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
-    Left = 336
+    Left = 168
     Top = 104
   end
   object zqrypelanggaran: TZQuery
@@ -137,7 +147,7 @@ object pelanggaran: Tpelanggaran
     SQL.Strings = (
       'select * from pelanggaran')
     Params = <>
-    Left = 232
+    Left = 64
     Top = 104
   end
 end

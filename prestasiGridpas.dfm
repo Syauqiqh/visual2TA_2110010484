@@ -1,8 +1,8 @@
 object Fprestasi: TFprestasi
-  Left = 192
-  Top = 125
+  Left = 747
+  Top = 163
   Width = 496
-  Height = 343
+  Height = 351
   Caption = 'Fprestasi'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,6 +11,7 @@ object Fprestasi: TFprestasi
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -36,7 +37,7 @@ object Fprestasi: TFprestasi
   end
   object dbgrdPrestasi: TDBGrid
     Left = 16
-    Top = 120
+    Top = 144
     Width = 441
     Height = 161
     DataSource = dsPrestasi
@@ -112,10 +113,19 @@ object Fprestasi: TFprestasi
     TabOrder = 7
     OnClick = editprestasiClick
   end
+  object baruprestasi: TButton
+    Left = 232
+    Top = 96
+    Width = 97
+    Height = 25
+    Caption = 'Baru'
+    TabOrder = 8
+    OnClick = baruprestasiClick
+  end
   object dsPrestasi: TDataSource
     DataSet = zqryprestasi
-    Left = 336
-    Top = 88
+    Left = 168
+    Top = 104
   end
   object Zconprestasi: TZConnection
     ControlsCodePage = cGET_ACP
@@ -128,8 +138,8 @@ object Fprestasi: TFprestasi
     User = 'root'
     Protocol = 'mysql'
     LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
-    Left = 232
-    Top = 88
+    Left = 64
+    Top = 104
   end
   object zqryprestasi: TZQuery
     Connection = Zconprestasi
@@ -137,7 +147,7 @@ object Fprestasi: TFprestasi
     SQL.Strings = (
       'select * from prestasi')
     Params = <>
-    Left = 288
-    Top = 88
+    Left = 120
+    Top = 104
   end
 end

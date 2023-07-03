@@ -36,17 +36,16 @@ type
     zqryOT: TZQuery;
     ZconOT: TZConnection;
     editOT: TButton;
-    frxOT: TfrxReport;
-    frxdbOT: TfrxDBDataset;
-    btnVROT: TButton;
     baruOT: TButton;
     procedure btnLDOTClick(Sender: TObject);
     procedure TOTClick(Sender: TObject);
-    procedure edtTPOTChange(Sender: TObject);
     procedure HOTClick(Sender: TObject);
     procedure OTonClick(Column: TColumn);
     procedure editOTClick(Sender: TObject);
-    procedure btnVROTClick(Sender: TObject);
+    procedure bersihOT;
+    procedure posisiawalOT;
+    procedure baruOTClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,6 +54,7 @@ type
 
 var
   orang_tua: Torang_tua;
+  id :string;
 
 implementation
 
@@ -79,7 +79,7 @@ begin
 
 end;
 
-procedure Tlaporan.bersihOT;
+procedure Torang_tua.bersihOT;
 begin
 edtNamaOT.Clear;
 edtNIKOT.Clear;
@@ -92,22 +92,22 @@ edtStatus.Clear;
 edtStatusHUB.Clear;
 end;
 
-procedure Tlaporan.posisiawalOT;
+procedure Torang_tua.posisiawalOT;
 begin
 bersihOT;
-edtNamaOT.Enabled:= True;
-edtNIKOT.Enabled:= True;
-edtpekerjaan.Enabled:= True;
-edtTPOT.Enabled:= True;
-edtTelp.Enabled:= True;
-edtAlamat.Enabled:= True;
-cbbJKOT.Enabled:= True;
-edtStatus.Enabled:= True;
-edtStatusHUB.Enabled:= True;
-
-TLaporan.Enabled:= True;
-HLaporan.Enabled:= False;
-btnLDLapora.nabled:= True;
+edtNamaOT.Enabled:= False;
+edtNIKOT.Enabled:= False;
+edtpekerjaan.Enabled:= False;
+edtTPOT.Enabled:= False;
+edtTelp.Enabled:= False;
+edtAlamat.Enabled:= False;
+cbbJKOT.Enabled:= False;
+edtStatus.Enabled:= False;
+edtStatusHUB.Enabled:= False;
+baruOT.Enabled:= False;
+TOT.Enabled:= False;
+HOT.Enabled:= False;
+btnLDOT.Enabled:= True;
 end;
 procedure Torang_tua.HOTClick(Sender: TObject);
 begin
@@ -218,9 +218,28 @@ posisiawalOT;
 end;
 end;
 
-procedure Torang_tua.btnVROTClick(Sender: TObject);
+
+procedure Torang_tua.baruOTClick(Sender: TObject);
 begin
-frxOT.ShowReport();
+bersihOT;
+edtNamaOT.Enabled:= True;
+edtNIKOT.Enabled:= True;
+edtpekerjaan.Enabled:= True;
+edtTPOT.Enabled:= True;
+edtTelp.Enabled:= True;
+edtAlamat.Enabled:= True;
+cbbJKOT.Enabled:= True;
+edtStatus.Enabled:= True;
+edtStatusHUB.Enabled:= True;
+TOT.Enabled:= True;
+HOT.Enabled:= True;
+btnLDOT.Enabled:= True;
+baruOT.Enabled:= False;
+end;
+
+procedure Torang_tua.FormCreate(Sender: TObject);
+begin
+posisiawalOT;
 end;
 
 end.

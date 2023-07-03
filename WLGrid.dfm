@@ -1,6 +1,6 @@
 object wali_kelas: Twali_kelas
-  Left = 244
-  Top = 232
+  Left = 245
+  Top = 187
   Width = 922
   Height = 365
   Caption = 'wali_kelas'
@@ -11,6 +11,7 @@ object wali_kelas: Twali_kelas
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -151,7 +152,7 @@ object wali_kelas: Twali_kelas
     ItemHeight = 13
     TabOrder = 8
     Items.Strings = (
-      'Laki-laki'
+      'pria'
       'perempuan')
   end
   object dtpWK: TDateTimePicker
@@ -195,22 +196,14 @@ object wali_kelas: Twali_kelas
     TabOrder = 13
     OnClick = editWKClick
   end
-  object btnVRWK: TButton
-    Left = 448
-    Top = 136
-    Width = 105
-    Height = 33
-    Caption = 'View Report'
-    TabOrder = 14
-    OnClick = btnVRWKClick
-  end
   object baruWK: TButton
     Left = 576
     Top = 136
     Width = 105
     Height = 33
     Caption = 'Baru'
-    TabOrder = 15
+    TabOrder = 14
+    OnClick = baruWKClick
   end
   object dsWK: TDataSource
     DataSet = zqryWK
@@ -239,35 +232,5 @@ object wali_kelas: Twali_kelas
     Params = <>
     Left = 864
     Top = 40
-  end
-  object frxWK: TfrxReport
-    Version = '4.0.11'
-    DataSet = frxdbWK
-    DataSetName = 'frxdbWK'
-    DotMatrixReport = False
-    IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
-    PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
-    PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45109.860009918980000000
-    ReportOptions.LastChange = 45109.860009918980000000
-    ScriptLanguage = 'PascalScript'
-    ScriptText.Strings = (
-      'begin'
-      ''
-      'end.')
-    Left = 344
-    Top = 160
-    Datasets = <>
-    Variables = <>
-    Style = <>
-  end
-  object frxdbWK: TfrxDBDataset
-    UserName = 'frxdbWK'
-    CloseDataSource = False
-    DataSource = dsWK
-    Left = 376
-    Top = 160
   end
 end

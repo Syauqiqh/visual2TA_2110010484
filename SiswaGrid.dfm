@@ -1,6 +1,6 @@
 object FSiswa: TFSiswa
-  Left = 251
-  Top = 130
+  Left = 380
+  Top = 189
   Width = 997
   Height = 456
   Caption = 'siswagrid'
@@ -11,6 +11,7 @@ object FSiswa: TFSiswa
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -123,10 +124,10 @@ object FSiswa: TFSiswa
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    OnCellClick = siswacellclick
+    OnCellClick = gridsiswacellclick
   end
   object tambahSiswa: TButton
-    Left = 144
+    Left = 40
     Top = 232
     Width = 105
     Height = 33
@@ -135,7 +136,7 @@ object FSiswa: TFSiswa
     OnClick = tambahSiswaClick
   end
   object LDSiswa: TButton
-    Left = 392
+    Left = 328
     Top = 232
     Width = 89
     Height = 33
@@ -143,40 +144,31 @@ object FSiswa: TFSiswa
     TabOrder = 2
     OnClick = LDSiswaClick
   end
-  object VRSiswa: TButton
-    Left = 40
-    Top = 232
-    Width = 81
-    Height = 33
-    Caption = 'View Report'
-    TabOrder = 3
-    OnClick = VRSiswaClick
-  end
   object VOT: TButton
-    Left = 504
+    Left = 464
     Top = 232
     Width = 89
     Height = 33
     Caption = 'View Orang Tua'
-    TabOrder = 4
+    TabOrder = 3
     OnClick = VOTClick
   end
   object VWK: TButton
-    Left = 272
+    Left = 184
     Top = 232
     Width = 97
     Height = 33
     Caption = 'View wakil Kelas'
-    TabOrder = 5
+    TabOrder = 4
     OnClick = VWKClick
   end
   object HSiswa: TButton
-    Left = 616
+    Left = 592
     Top = 232
     Width = 105
     Height = 33
     Caption = 'Hapus Data'
-    TabOrder = 6
+    TabOrder = 5
     OnClick = HSiswaClick
   end
   object edtEnis: TEdit
@@ -184,35 +176,35 @@ object FSiswa: TFSiswa
     Top = 8
     Width = 257
     Height = 21
-    TabOrder = 7
+    TabOrder = 6
   end
   object edtEnisn: TEdit
     Left = 120
     Top = 40
     Width = 257
     Height = 21
-    TabOrder = 8
+    TabOrder = 7
   end
   object edtENS: TEdit
     Left = 120
     Top = 72
     Width = 257
     Height = 21
-    TabOrder = 9
+    TabOrder = 8
   end
   object edtEnik: TEdit
     Left = 120
     Top = 104
     Width = 257
     Height = 21
-    TabOrder = 10
+    TabOrder = 9
   end
   object edtETL: TEdit
     Left = 120
     Top = 136
     Width = 257
     Height = 21
-    TabOrder = 11
+    TabOrder = 10
   end
   object dtpSiswa: TDateTimePicker
     Left = 120
@@ -221,7 +213,7 @@ object FSiswa: TFSiswa
     Height = 21
     Date = 45095.438990266200000000
     Time = 45095.438990266200000000
-    TabOrder = 12
+    TabOrder = 11
   end
   object cbbJKSiwa: TComboBox
     Left = 120
@@ -229,7 +221,10 @@ object FSiswa: TFSiswa
     Width = 257
     Height = 21
     ItemHeight = 13
-    TabOrder = 13
+    TabOrder = 12
+    Items.Strings = (
+      'pria'
+      'perempuan')
   end
   object cbbJurusan: TComboBox
     Left = 544
@@ -237,66 +232,66 @@ object FSiswa: TFSiswa
     Width = 249
     Height = 21
     ItemHeight = 13
-    TabOrder = 14
+    TabOrder = 13
   end
   object edtEWK: TEdit
     Left = 544
     Top = 40
     Width = 249
     Height = 21
-    TabOrder = 15
+    TabOrder = 14
   end
   object edtEalamat: TEdit
     Left = 544
     Top = 72
     Width = 249
     Height = 21
-    TabOrder = 16
+    TabOrder = 15
   end
   object edtEHP: TEdit
     Left = 544
     Top = 104
     Width = 249
     Height = 21
-    TabOrder = 17
+    TabOrder = 16
   end
   object edtEsiswaOT: TEdit
     Left = 544
     Top = 136
     Width = 249
     Height = 21
-    TabOrder = 18
+    TabOrder = 17
   end
   object edtEsiswaLaporan: TEdit
     Left = 544
     Top = 168
     Width = 249
     Height = 21
-    TabOrder = 19
+    TabOrder = 18
   end
   object edtEsiswaStatus: TEdit
     Left = 544
     Top = 200
     Width = 249
     Height = 21
-    TabOrder = 20
+    TabOrder = 19
   end
   object editSiswa: TButton
-    Left = 744
+    Left = 736
     Top = 232
     Width = 89
     Height = 33
     Caption = 'Edit'
-    TabOrder = 21
+    TabOrder = 20
     OnClick = editSiswaClick
   end
   object barusiswa: TButton
-    Left = 856
+    Left = 864
     Top = 232
     Width = 89
     Height = 33
     Caption = 'Baru'
-    TabOrder = 22
+    TabOrder = 21
     OnClick = barusiswaClick
   end
   object dsSiswa: TDataSource
@@ -326,35 +321,5 @@ object FSiswa: TFSiswa
     LibraryLocation = 'C:\Program Files (x86)\Borland\Zeos703\libmysql.dll'
     Left = 872
     Top = 32
-  end
-  object frxdbsiswa: TfrxDBDataset
-    UserName = 'frxdbsiswa'
-    CloseDataSource = False
-    DataSource = dsSiswa
-    Left = 912
-    Top = 144
-  end
-  object rprtsiswa: TfrxReport
-    Version = '4.0.11'
-    DataSet = frxdbsiswa
-    DataSetName = 'frxdbsiswa'
-    DotMatrixReport = False
-    IniFile = '\Software\Fast Reports'
-    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
-    PreviewOptions.Zoom = 1.000000000000000000
-    PrintOptions.Printer = 'Default'
-    PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 45109.854276597220000000
-    ReportOptions.LastChange = 45109.854276597220000000
-    ScriptLanguage = 'PascalScript'
-    ScriptText.Strings = (
-      'begin'
-      ''
-      'end.')
-    Left = 840
-    Top = 176
-    Datasets = <>
-    Variables = <>
-    Style = <>
   end
 end

@@ -36,9 +36,6 @@ type
     ZconWk: TZConnection;
     zqryWK: TZQuery;
     editWK: TButton;
-    btnVRWK: TButton;
-    frxWK: TfrxReport;
-    frxdbWK: TfrxDBDataset;
     baruWK: TButton;
     procedure btnLDWKClick(Sender: TObject);
     procedure TWKClick(Sender: TObject);
@@ -47,7 +44,9 @@ type
     procedure HWKClick(Sender: TObject);
     procedure walikelasonclick(Column: TColumn);
     procedure editWKClick(Sender: TObject);
-    procedure btnVRWKClick(Sender: TObject);
+    procedure baruWKClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    
   private
     { Private declarations }
   public
@@ -56,7 +55,7 @@ type
 
 var
   wali_kelas: Twali_kelas;
-
+  id : string;
 implementation
 
 {$R *.dfm}
@@ -78,7 +77,7 @@ begin
   dbgrdWK.Columns[8].Width:=75;
 end;
 
-procedure TFSiswa.bersihWaliKelas;
+procedure Twali_kelas.bersihWaliKelas;
 begin
 edtNama.Clear;
 edtNIk.Clear;
@@ -86,31 +85,28 @@ edtTelp.Clear;
 cbbJK.Clear;
 edtAlamat.Clear;
 edtTL.Clear;
-dtpWK.Clear;
 edtTP.Clear;
 edtstatus.Clear;
 end;
 
-procedure TFSiswa.posisiawalWaliKelas;
+procedure Twali_kelas.posisiawalWaliKelas;
 begin
 bersihWaliKelas;
-edtNama.Enabled:= True;
-edtNIk.Enabled:= True;
-edtTelp.Enabled:= True;
-cbbJK.Enabled:= True;
-edtAlamat.Enabled:= True;
-edtTL.Enabled:= True;
-dtpWK.Enabled:= True;
-edtTP.Enabled:= True;
-edtstatus.Enabled:= True;
-TWK.Enabled:= True;
+edtNama.Enabled:= False;
+edtNIk.Enabled:= False;
+edtTelp.Enabled:= False;
+cbbJK.Enabled:= False;
+edtAlamat.Enabled:= False;
+edtTL.Enabled:= False;
+dtpWK.Enabled:= False;
+edtTP.Enabled:= False;
+edtstatus.Enabled:= False;
+TWK.Enabled:= False;
 HWK.Enabled:= False;
 btnLDWK.Enabled:= True;
+baruWK.Enabled:= True;
 end;
-procedure Twali_kelas.btnVRWKClick(Sender: TObject);
-begin
-frxWK.ShowReport();
-end;
+
 
 
 
@@ -125,7 +121,7 @@ zqryWK.SQL.Clear;
 zqryWK.SQL.Add('select * from wali_kelas');
 zqryWK.Open;
 ShowMessage('DATA BERHASIL DIHAPUS');
-posisiawalSiswa;
+posisiawalWaliKelas;
 end else
 begin
 ShowMessage('DATA BATAL DIHAPUS');
@@ -162,10 +158,6 @@ if edtTL.Text ='' then
 begin
 ShowMessage('TEMPAT LAHIR TIDAK BOLEH KOSONG!');
 end else
-if dtpWK.Text ='' then
-begin
-ShowMessage('TANGGAL LAHIR TIDAK BOLEH KOSONG!');
-end else
 if edtTP.Text ='' then
 begin
 ShowMessage('TINGKAT PENDIKAN TIDAK BOLEH KOSONG!');
@@ -187,6 +179,7 @@ begin
 end;
 
 end;
+
 procedure Twali_kelas.walikelasonclick(Column: TColumn);
 begin
 id:= zqryWK.Fields[0].AsString;
@@ -196,18 +189,17 @@ edtTelp.Text:= zqryWK.Fields[3].AsString;
 cbbJK.Text:= zqryWK.Fields[4].AsString;
 edtAlamat.Text:= zqryWK.Fields[5].AsString;
 edtTL.Text:= zqryWK.Fields[6].AsString;
-dtpWK.Text:= zqryWK.Fields[7].AsString;
 edtTP.Text:= zqryWK.Fields[8].AsString;
 edtstatus.Text:= zqryWK.Fields[9].AsString;
 end;
 
 procedure Twali_kelas.editWKClick(Sender: TObject);
 begin
-if (edtNama.Text= '')or (edtNIk.Text ='')or(edtTelp.Text= '')or (cbbJK.Text ='')or (edtAlamat.Text ='')or (edtTL.Text ='')or (dtpWK.Text ='')or (edtTP.Text ='')or (edtstatus.Text ='') then
+if (edtNama.Text= '')or (edtNIk.Text ='')or(edtTelp.Text= '')or (cbbJK.Text ='')or (edtAlamat.Text ='')or (edtTL.Text ='')or (edtTP.Text ='')or (edtstatus.Text ='') then
 begin
 ShowMessage('INPUTAN WAJIB DIISI!');
 end else
-if (edtNama.Text = zqryWK.Fields[1].AsString)or (edtNIk.Text =zqryWK.Fields[2].AsString)or(edtTelp.Text= zqryWK.Fields[3].AsString)or (cbbJK.Text =zqryWK.Fields[4].AsString)or (edtAlamat.Text =zqryWK.Fields[5].AsString)or (edtTL.Text =zqryWK.Fields[6].AsString)or (dtpWK.Text =zqryWK.Fields[7].AsString)or (edtTP.Text =zqryWK.Fields[8].AsString)or (edtstatus.Text =zqryWK.Fields[9].AsString) then
+if (edtNama.Text = zqryWK.Fields[1].AsString)or (edtNIk.Text =zqryWK.Fields[2].AsString)or(edtTelp.Text= zqryWK.Fields[3].AsString)or (cbbJK.Text =zqryWK.Fields[4].AsString)or (edtAlamat.Text =zqryWK.Fields[5].AsString)or (edtTL.Text =zqryWK.Fields[6].AsString)or (edtTP.Text =zqryWK.Fields[8].AsString)or (edtstatus.Text =zqryWK.Fields[9].AsString) then
 begin
 ShowMessage('DATA TIDAK ADA PERUBAHAN');
 posisiawalWaliKelas;
@@ -221,6 +213,31 @@ zqryWK.SQL.Add('select * from wali_kelas');
 zqryWK.Open;
 posisiawalWaliKelas;
 
+end;
+
+end;
+
+procedure Twali_kelas.baruWKClick(Sender: TObject);
+begin
+bersihWaliKelas;
+edtNama.Enabled:= True;
+edtNIk.Enabled:= True;
+edtTelp.Enabled:= True;
+cbbJK.Enabled:= True;
+edtAlamat.Enabled:= True;
+edtTL.Enabled:= True;
+dtpWK.Enabled:= True;
+edtTP.Enabled:= True;
+edtstatus.Enabled:= True;
+TWK.Enabled:= True;
+HWK.Enabled:=True;
+btnLDWK.Enabled:= True;
+baruWK.Enabled:= False;
+end;
+
+procedure Twali_kelas.FormCreate(Sender: TObject);
+begin
+posisiawalWaliKelas;
 end;
 
 end.
